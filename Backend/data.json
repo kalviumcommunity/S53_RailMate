@@ -8,7 +8,7 @@
         "average_rating": 4.5,
         "reviews": "Comfortable journey with excellent service. Clean and well-maintained coaches.",
         "timings": "Departs Chennai at 06:00 AM, Arrives Bangalore at 11:00 AM",
-        "img-link":"https://images.livemint.com/img/2022/08/11/1600x900/vistadome1_1660180990346_1660181004608_1660181004608.jpg",
+        "img_link":"https://images.livemint.com/img/2022/08/11/1600x900/vistadome1_1660180990346_1660181004608_1660181004608.jpg",
         "link":"https://www.youtube.com/watch?v=FEw-A-NkkQo"
       },
       {
@@ -451,7 +451,6 @@
         "reviews": "Historical journey with decent amenities. Punctual departures.",
         "timings": "Departs Mumbai at 21:30 PM, Arrives Howrah at 09:15 AM"
       }
-      // Add more train entries up to 50 with descriptions, ratings, reviews, and timings
     ]
 
   
