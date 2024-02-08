@@ -1,7 +1,8 @@
 const express = require("express")
 const app = express()
 require("dotenv").config()
-
+const connectDB=require("./db")
+connectDB()
 const PORT = process.env.PORT || 3065
 
 app.get('/', (req, res) => {
@@ -9,7 +10,7 @@ app.get('/', (req, res) => {
 })
 
 app.get("/ping", ((req, res) => {
-    res.send("pong")
+    res.send("Vishnu Preethasm")
 }))
 
 app.listen(PORT,()=>{
