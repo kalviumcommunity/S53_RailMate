@@ -5,11 +5,11 @@ const connectDB= async ()=>{
     try{
        
         await mongoose.connect(mongoURI)
-        console.log("DataBase Connected")
+        console.log("DataBase have been succesfully Connected")
 
     }catch(error){
         console.log("error:",error)
-        console.log("DataBase Disconnected")        
+        console.log("DataBase have Disconnected ,Please check the errors.")        
     }
 }
 module.exports=connectDB
