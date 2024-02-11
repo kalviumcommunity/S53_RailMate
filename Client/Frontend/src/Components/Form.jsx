@@ -10,7 +10,7 @@ export default function Form() {
   } = useForm();
 
   const formSubmitHandler = async (data) => {
-console.log("data:",data)
+console.log(data)
   };
   
 

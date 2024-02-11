@@ -1,8 +1,7 @@
 import React from 'react';
 import '../App.css';
 import { useForm } from 'react-hook-form';
-
-export default function Form() {
+export default function Login() {
   const {
     register,
     handleSubmit,
@@ -10,14 +9,14 @@ export default function Form() {
   } = useForm();
 
   const formSubmitHandler = async (data) => {
-console.log("data:",data)
+console.log(data)
   };
   
 
   return (
     <div className="form-container">
       <fieldset>
-        <legend>Signup</legend>
+        <legend>Login</legend>
         <form onSubmit={handleSubmit(formSubmitHandler)}>
           {isSubmitSuccessful && (
             <div className="success">
@@ -25,19 +24,7 @@ console.log("data:",data)
             </div>
           )}
 
-          <label style={{ color: 'black' }}>First Name:</label>
-          <input
-            type="text"
-            name="name"
-            {...register('name', {
-              required: 'Please provide the name',
-              minLength: {
-                value: 4,
-                message: 'Minimum four characters required',
-              },
-            })}
-          />
-          {errors.name && <p className="err">{errors.name.message}</p>}
+          
 
           <label style={{ color: 'black' }}>Email:</label>
           <input
@@ -52,7 +39,6 @@ console.log("data:",data)
             })}
           />
           {errors.email && <p className="err">{errors.email.message}</p>}
-
           <label style={{ color: 'black' }}>Number:</label>
           <input
             type="password"
@@ -67,7 +53,7 @@ console.log("data:",data)
           />
           {errors.Password && <p className="err">{errors.Password.message}</p>}
 
-          <input type="submit" value={'Signup'} />
+          <input type="submit" value={'Login'} />
         </form>
       </fieldset>
     </div>
