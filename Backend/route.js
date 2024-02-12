@@ -1,39 +1,53 @@
 const express = require("express");
 const app = express();
 const router = express.Router();
-const dataModel = require("./scheema");
+const {dataModel,usersList} = require('./scheema');
 app.use(express.json());
+const cors = require("cors");
+app.use(cors());
 
+
+
+
+/////Get the train details.
 router.get("/Train", async (req, res) => {
   try {
     const NewTrain = await dataModel.find();
     console.log("NewTrain: ", NewTrain);
     res.send(NewTrain);
   } catch (err) {
-    console.log("error");
-  }
-});
-router.post("/CreateForm", async (req, res) => {
-  try {
-    res.send({message:true,data:"data added succesfully."})
-  } catch (err) {
-    console.log("error");
-  }
-});
-router.put("/UpdateTrainList", async (req, res) => {
-  try {
-    res.send({message:true,data:"data Updated succesfully."})
-  } catch (err) {
-    console.log("error");
-  }
-});
-router.delete("/DeleteForm", async (req, res) => {
-  try {
-    res.send({message:true,data:"data Deleted succesfully."})
-  } catch (err) {
-    console.log("error");
+    console.error(err);
+    res.status(500).send({ message: "error", error: "Failed to fetch data" });
   }
 });
 
 
-module.exports = router;
+
+///Posting the From List
+router.post("/create",async(req,res)=>{
+  const NewUserData=new usersList(req.body)
+  console.log(req.body)
+  try {
+    await NewUserData.save()
+    res.send({message:"success",data:NewUserData})
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ message: "error", error: "Failed to save data" });
+  }
+})
+
+
+
+
+
+/////Getting the request for the signup form
+router.get("/getuser",async(req,res)=>{
+  try {
+    const data=await UserModel.find()
+    res.send({message:"success",datas:data})
+  } catch (error) {
+    res.send({message:"error"})
+  }
+})
+
+module.exports = router;
