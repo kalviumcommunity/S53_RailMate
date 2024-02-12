@@ -33,6 +33,14 @@ const schema = new mongoose.Schema({
     require : true
   }
 });
+const Datatype=mongoose.Schema({
+  name:String,
+  email:String,
+  Password:Number,
+  ConfirmPassword:Number,
+})
+
 
 const dataModel = mongoose.model("TrainsList", schema);
-module.exports = dataModel;
+const FormdataModel=mongoose.model("FormList",Datatype)
+module.exports = dataModel,FormdataModel;

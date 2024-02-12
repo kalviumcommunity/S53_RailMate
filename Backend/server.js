@@ -6,13 +6,14 @@ connectDB()
 const router = require("./route");
 const cors = require("cors");
 app.use(cors());
-app.use("/Train", router);
+app.use(router);
 
 const PORT = process.env.PORT || 3064
 
 app.get('/', (req, res) => {
     res.send('Railway Mate Api is Working')
 })
+
 
 app.get("/ping", ((req, res) => {
     res.send("pong")
