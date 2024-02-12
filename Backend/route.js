@@ -24,17 +24,26 @@ router.get("/Train", async (req, res) => {
 
 
 ///Posting the From List
-router.post("/create",async(req,res)=>{
-  const NewUserData=new usersList(req.body)
-  console.log(req.body)
+router.post("/create", async (req, res) => {
+  const userDatas = {
+    Name: req.body.Name,
+    Email: req.body.Email,
+    Password: req.body.Password,
+    ConfirmPassword: req.body.ConfirmPassword,
+  };
+
+  const NewUserData = new usersList(userDatas);
+console.log(NewUserData)
   try {
-    await NewUserData.save()
-    res.send({message:"success",data:NewUserData})
+    await NewUserData.save();
+    res.send({ message: "success", data: NewUserData });
   } catch (error) {
     console.error(error);
     res.status(500).send({ message: "error", error: "Failed to save data" });
   }
-})
+});
+
+
 
 
 
@@ -43,7 +52,7 @@ router.post("/create",async(req,res)=>{
 /////Getting the request for the signup form
 router.get("/getuser",async(req,res)=>{
   try {
-    const data=await UserModel.find()
+    const data=await usersList.find()
     res.send({message:"success",datas:data})
   } catch (error) {
     res.send({message:"error"})

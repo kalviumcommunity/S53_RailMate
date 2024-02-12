@@ -46,11 +46,12 @@ const userData=new mongoose.Schema({
     type: String,
     require: true,
   },
+
   ConfirmPassword: {
     type: String,
     require: true,
   },
 })
 const dataModel = mongoose.model("TrainsList", schema);
-const usersList=mongoose.model("usersList",userData)
+const usersList=new mongoose.model("usersList",userData)
 module.exports = {dataModel,usersList};
