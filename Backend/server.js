@@ -3,6 +3,11 @@ const app = express()
 require("dotenv").config()
 const connectDB=require("./db")
 connectDB()
+const router = require("./route");
+const cors = require("cors");
+app.use(cors());
+app.use("/Train", router);
+
 const PORT = process.env.PORT || 3064
 
 app.get('/', (req, res) => {
