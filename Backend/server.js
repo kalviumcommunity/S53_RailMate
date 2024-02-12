@@ -3,7 +3,7 @@ const app = express()
 require("dotenv").config()
 const connectDB=require("./db")
 connectDB()
-const PORT = process.env.PORT || 3065
+const PORT = process.env.PORT || 3064
 
 app.get('/', (req, res) => {
     res.send('Railway Mate Api is Working')
