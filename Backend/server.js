@@ -10,7 +10,7 @@ app.get('/', (req, res) => {
 })
 
 app.get("/ping", ((req, res) => {
-    res.send("Vishnu Preethasm")
+    res.send("pong")
 }))
 
 app.listen(PORT,()=>{

@@ -7,7 +7,13 @@
         "description": "Shatabdi Express is a high-speed train known for its punctuality and comfort. Enjoy a swift journey from Chennai to Bangalore.",
         "average_rating": 4.5,
         "reviews": "Comfortable journey with excellent service. Clean and well-maintained coaches.",
+<<<<<<< HEAD
         "timings": "Departs Chennai at 06:00 AM, Arrives Bangalore at 11:00 AM"
+=======
+        "timings": "Departs Chennai at 06:00 AM, Arrives Bangalore at 11:00 AM",
+        "img_link":"https://images.livemint.com/img/2022/08/11/1600x900/vistadome1_1660180990346_1660181004608_1660181004608.jpg",
+        "link":"https://www.youtube.com/watch?v=FEw-A-NkkQo"
+>>>>>>> 8ecae8344b496d2c44959a69064cd24b28a58538
       },
       {
         "train_number": "12627",
