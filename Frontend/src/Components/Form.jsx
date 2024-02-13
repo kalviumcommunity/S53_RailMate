@@ -1,9 +1,7 @@
 import React from 'react';
 import '../App.css';
 import { useForm } from 'react-hook-form';
-import axios from 'axios';
-
-axios.defaults.baseURL="http://localhost:3002/"
+import axios from 'axios'
 export default function Form() {
   const {
     register,
@@ -12,9 +10,9 @@ export default function Form() {
   } = useForm();
 
   const formSubmitHandler = async (data) => {
-  // console.log(data)
+  console.log(data)
 try {
-  const response =await axios.post("create",data)
+  const response =await axios.post("http://localhost:5000/create",data)
   console.log(response.data.data)
 } catch (error) {
   console.log("error",error)
