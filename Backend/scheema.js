@@ -33,25 +33,14 @@ const schema = new mongoose.Schema({
     require : true
   }
 });
-const userData=new mongoose.Schema({
-  Name: {
-    type: String,
-    require: true,
-  },
-  Email: {
-    type: String,
-    require: true,
-  },
-  Password: {
-    type: String,
-    require: true,
-  },
-
-  ConfirmPassword: {
-    type: String,
-    require: true,
-  },
+const Datatype=mongoose.Schema({
+  Name:String,
+  Email:String,
+  Password:Number,
+  ConfirmPassword:Number,
 })
+
+
 const dataModel = mongoose.model("TrainsList", schema);
-const usersList=new mongoose.model("usersList",userData)
-module.exports = {dataModel,usersList};
+const FormdataModel=mongoose.model("FormList",Datatype)
+module.exports = {dataModel,FormdataModel};

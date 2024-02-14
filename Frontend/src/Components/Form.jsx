@@ -1,7 +1,8 @@
 import React from 'react';
 import '../App.css';
 import { useForm } from 'react-hook-form';
-import axios from 'axios'
+import axios from "axios"
+
 export default function Form() {
   const {
     register,
@@ -10,6 +11,13 @@ export default function Form() {
   } = useForm();
 
   const formSubmitHandler = async (data) => {
+console.log("data:",data)
+try {
+  const response=await axios.post("http://localhost:3002/CreateForm",data)
+  console.log(response.data.data)
+} catch (error) {
+  console.log("error:",error.message)
+
   console.log(data)
 try {
   const response =await axios.post("http://localhost:5000/create",data)
@@ -74,13 +82,22 @@ try {
           {errors.Password && <p className="err">{errors.Password.message}</p>}
           <label style={{ color: 'black' }}>Number:</label>
           <input
+
+            type="password"
+
             type="number"
+
             name="ConfirmPassword"
             {...register('ConfirmPassword', {
               required: 'Enter ConfirmPassword',
               minLength: {
+
+                value: 5,
+                message: 'Please enter the valid phone Password',
+
                 value: 10,
                 message: 'Please enter the valid ConfirmPassword',
+
               },
             })}
           />
