@@ -17,6 +17,13 @@ try {
   console.log(response.data.data)
 } catch (error) {
   console.log("error:",error.message)
+
+  console.log(data)
+try {
+  const response =await axios.post("http://localhost:5000/create",data)
+  console.log(response.data.data)
+} catch (error) {
+  console.log("error",error)
 }
   };
   
@@ -60,34 +67,43 @@ try {
           />
           {errors.Email && <p className="err">{errors.Email.message}</p>}
 
-          <label style={{ color: 'black' }}>Number:</label>
+          <label style={{ color: 'black' }}>Password:</label>
           <input
-            type="password"
+            type="number"
             name="Password"
             {...register('Password', {
               required: 'Enter Password',
               minLength: {
-                value: 5,
-                message: 'Please enter the valid phone Password',
+                value: 10,
+                message: 'Please enter the valid Password',
               },
             })}
           />
           {errors.Password && <p className="err">{errors.Password.message}</p>}
           <label style={{ color: 'black' }}>Number:</label>
           <input
+
             type="password"
+
+            type="number"
+
             name="ConfirmPassword"
             {...register('ConfirmPassword', {
               required: 'Enter ConfirmPassword',
               minLength: {
+
                 value: 5,
                 message: 'Please enter the valid phone Password',
+
+                value: 10,
+                message: 'Please enter the valid ConfirmPassword',
+
               },
             })}
           />
           {errors.ConfirmPassword && <p className="err">{errors.ConfirmPassword.message}</p>}
 
-          <input type="submit" value={'Signup'} />
+          <input type="submit" value={'Register'} />
         </form>
       </fieldset>
     </div>
