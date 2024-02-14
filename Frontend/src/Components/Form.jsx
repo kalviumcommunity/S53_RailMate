@@ -1,6 +1,7 @@
 import React from 'react';
 import '../App.css';
 import { useForm } from 'react-hook-form';
+import axios from "axios"
 
 export default function Form() {
   const {
@@ -11,6 +12,12 @@ export default function Form() {
 
   const formSubmitHandler = async (data) => {
 console.log("data:",data)
+try {
+  const response=await axios.post("http://localhost:3002/CreateForm",data)
+  console.log(response.data)
+} catch (error) {
+  console.log("error:",error.message)
+}
   };
   
 
@@ -21,37 +28,37 @@ console.log("data:",data)
         <form onSubmit={handleSubmit(formSubmitHandler)}>
           {isSubmitSuccessful && (
             <div className="success">
-              <p>Registration Successful</p>
+              <p>Signup Successful</p>
             </div>
           )}
 
           <label style={{ color: 'black' }}>First Name:</label>
           <input
             type="text"
-            name="name"
-            {...register('name', {
-              required: 'Please provide the name',
+            name="Name"
+            {...register('Name', {
+              required: 'Please provide the Name',
               minLength: {
                 value: 4,
                 message: 'Minimum four characters required',
               },
             })}
           />
-          {errors.name && <p className="err">{errors.name.message}</p>}
+          {errors.Name && <p className="err">{errors.Name.message}</p>}
 
           <label style={{ color: 'black' }}>Email:</label>
           <input
             type="email"
-            name="email"
-            {...register('email', {
-              required: 'Enter email',
+            name="Email"
+            {...register('Email', {
+              required: 'Enter Email',
               minLength: {
                 value: 5,
-                message: 'Type valid email',
+                message: 'Type valid Email',
               },
             })}
           />
-          {errors.email && <p className="err">{errors.email.message}</p>}
+          {errors.Email && <p className="err">{errors.Email.message}</p>}
 
           <label style={{ color: 'black' }}>Number:</label>
           <input
@@ -66,6 +73,19 @@ console.log("data:",data)
             })}
           />
           {errors.Password && <p className="err">{errors.Password.message}</p>}
+          <label style={{ color: 'black' }}>Number:</label>
+          <input
+            type="password"
+            name="ConfirmPassword"
+            {...register('ConfirmPassword', {
+              required: 'Enter ConfirmPassword',
+              minLength: {
+                value: 5,
+                message: 'Please enter the valid phone Password',
+              },
+            })}
+          />
+          {errors.ConfirmPassword && <p className="err">{errors.ConfirmPassword.message}</p>}
 
           <input type="submit" value={'Signup'} />
         </form>

@@ -1,8 +1,7 @@
 const express = require("express");
-const app = express();
+
 const router = express.Router();
-const dataModel = require("./scheema");
-app.use(express.json());
+const {dataModel ,FormdataModel}= require("./scheema");
 
 router.get("/Train", async (req, res) => {
   try {
@@ -13,9 +12,14 @@ router.get("/Train", async (req, res) => {
     console.log("error");
   }
 });
+router.use(express.json());
 router.post("/CreateForm", async (req, res) => {
+  const data=req.body
+  const newUserData= new FormdataModel(data)
+  console.log(newUserData)
   try {
-    res.send({message:true,data:"data added succesfully."})
+    await newUserData.save()
+    res.send({message:true,data:newUserData})
   } catch (err) {
     console.log("error");
   }

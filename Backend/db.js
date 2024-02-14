@@ -16,20 +16,4 @@ const connectDB= async ()=>{
 
 
 
-const Scheema=new mongoose.Schema({
-    train_number:Number,
-    train_name:String,
-    departure_station:String,
-    destination_station:String,
-    description:String,
-    reviews:String,
-    timings:String,
-    img_link:String,
-    link:String,
-    average_rating:Number,
-})
-
-
-// const collection=new mongoose.model("Data",Scheema)
-
 module.exports=connectDB
