@@ -9,7 +9,7 @@ router.get("/Train", async (req, res) => {
     console.log("NewTrain: ", NewTrain);
     res.send(NewTrain);
   } catch (err) {
-    console.log("error");
+    res.send({message:false,response:"please check the code here is the error."})
   }
 });
 router.use(express.json());
@@ -21,7 +21,7 @@ router.post("/CreateForm", async (req, res) => {
     await newUserData.save()
     res.send({message:true,data:newUserData})
   } catch (err) {
-    console.log("error");
+    res.send({message:false,response:"please check the code here is the error."})
   }
 });
 router.put("/UpdateTrainList/:id", async (req, res) => {
@@ -43,6 +43,7 @@ router.delete("/DeleteTrain/:id", async (req, res) => {
     res.send({message:true,data:"data Deleted succesfully.",data:deleteddata})
   } catch (err) {
     console.log("error");
+    res.send({message:false,response:"Please check their is an error try later"})
   }
 });
 
