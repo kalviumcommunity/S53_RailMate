@@ -24,16 +24,23 @@ router.post("/CreateForm", async (req, res) => {
     console.log("error");
   }
 });
-router.put("/UpdateTrainList", async (req, res) => {
+router.put("/UpdateTrainList/:id", async (req, res) => {
   try {
-    res.send({message:true,data:"data Updated succesfully."})
+    const id=req.params.id
+    const newData=req.body
+    const updatedCollage=await dataModel.findByIdAndUpdate(id,newData,{new:true})
+    res.send({message:true,data:"data Updated succesfully.",updatedCollage:updatedCollage})
   } catch (err) {
     console.log("error");
+    res.send({message:false,response:"please check the code here is the error."})
   }
 });
-router.delete("/DeleteForm", async (req, res) => {
+router.delete("/DeleteTrain/:id", async (req, res) => {
   try {
-    res.send({message:true,data:"data Deleted succesfully."})
+    const id=req.params.id
+    const data=req.data
+    const deleteddata=await dataModel.findByIdAndDelete(id)
+    res.send({message:true,data:"data Deleted succesfully.",data:deleteddata})
   } catch (err) {
     console.log("error");
   }
