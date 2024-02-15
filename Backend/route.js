@@ -13,13 +13,13 @@ router.get("/Train", async (req, res) => {
   }
 });
 router.use(express.json());
-router.post("/CreateForm", async (req, res) => {
+router.post("/CreateTrain", async (req, res) => {
   const data=req.body
-  const newUserData= new FormdataModel(data)
-  console.log(newUserData)
+  const newUserTrain= new dataModel(data)
+  console.log(newUserTrain)
   try {
-    await newUserData.save()
-    res.send({message:true,data:newUserData})
+    await newUserTrain.save()
+    res.send({message:true,data:newUserTrain})
   } catch (err) {
     res.send({message:false,response:"please check the code here is the error.",error:err})
   }
