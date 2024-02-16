@@ -3,7 +3,7 @@ import axios from "axios"
 const Home = () => {
   const [data,setData]=useState([])
   useEffect(()=>{
-axios.get("http://localhost:3002/train").then(res=>{
+axios.get("https://railmate.onrender.com/Train").then(res=>{
   // console.log(res.data)
   setData(res.data)
 }).catch(err=>{console.log("err",err)})
