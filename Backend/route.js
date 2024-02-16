@@ -13,6 +13,8 @@ router.get("/Train", async (req, res) => {
   }
 });
 router.use(express.json());
+
+
 router.post("/CreateTrain", async (req, res) => {
   const data=req.body
   const newUserTrain= new dataModel(data)
@@ -24,6 +26,10 @@ router.post("/CreateTrain", async (req, res) => {
     res.send({message:false,response:"please check the code here is the error.",error:err})
   }
 });
+
+
+////////////////////////////////////////
+
 router.put("/UpdateTrainList/:id", async (req, res) => {
   try {
     const id=req.params.id
@@ -35,6 +41,11 @@ router.put("/UpdateTrainList/:id", async (req, res) => {
     res.send({message:false,response:"please check the code here is the error.",error:err})
   }
 });
+
+
+
+
+/////////////////////////
 router.delete("/DeleteTrain/:id", async (req, res) => {
   try {
     const id=req.params.id
