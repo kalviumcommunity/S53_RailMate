@@ -32,6 +32,8 @@ const Navbar = () => {
           <h3>Signup</h3></Link>
         <Link style={{ textDecoration: "none", color: "black" }} to={"Login"}>
           <h3>Login</h3></Link>
+        <Link style={{ textDecoration: "none", color: "black" }} to={"TrainForm"}>
+          <h3>TrainForm</h3></Link>
 
       </div>
     </div>
