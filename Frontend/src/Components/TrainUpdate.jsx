@@ -1,7 +1,7 @@
 import React from 'react'
 import { useForm } from 'react-hook-form';
 import axios from "axios"
-const TrainUpdate = () => {
+const TrainputForm = () => {
     const {
         register,
         handleSubmit,
@@ -134,4 +134,4 @@ const TrainUpdate = () => {
   )
 }
 
-export default TrainUpdate
+export default TrainputForm

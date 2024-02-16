@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import axios from "axios"
+import TrainUpdate from './TrainPutForm'
+import TrainputForm from './TrainUpdate'
 const Home = () => {
   const [data, setData] = useState([])
+const [check,setCheck]=useState(false)
   useEffect(() => {
     axios.get("https://railmate.onrender.com/Train").then(res => {
       // console.log(res.data)
@@ -15,6 +18,15 @@ const Home = () => {
     } catch (error) {
       console.log(error)
     }
+  }
+  const UpdateTrain=async(id)=>{
+try {
+  const UpdatedTrain = await axios.put(`https://railmate.onrender.com/UpdateTrainList/${id}`)
+  console.log(UpdatedTrain)
+} catch (error) {
+  console.log(error)
+  
+}
   }
   return (
     <div>
@@ -35,7 +47,6 @@ const Home = () => {
           <button onClick={()=>{
             TrainDelete(e._id)
           }}>Delete Train</button>
-
         </div>
       ))}
 
