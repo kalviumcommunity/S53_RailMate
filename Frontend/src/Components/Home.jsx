@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from "axios"
-import TrainUpdate from './TrainPutForm'
+// import TrainUpdate from './TrainPutForm'
 import TrainputForm from './TrainUpdate'
 const Home = () => {
   const [data, setData] = useState([])

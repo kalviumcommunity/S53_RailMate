@@ -1,13 +1,17 @@
 import React from 'react'
 import { useForm } from 'react-hook-form';
 import axios from "axios"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const TrainputForm = () => {
     const {
         register,
         handleSubmit,
         formState: { errors, isSubmitSuccessful },
         } = useForm();
-
+        const showToastMessage = () => {
+            toast.success("Train Added Sucessfully!");
+        };
   const formSubmitHandler = async (data) => {
     //   console.log("data:",data)
       try {
@@ -21,16 +25,12 @@ const TrainputForm = () => {
 
     return (
         <div>
-  
+  {isSubmitSuccessful && showToastMessage()}
     <div className="form-container">
       <fieldset>
         <legend>Bharatiya Rail</legend>
         <form onSubmit={handleSubmit(formSubmitHandler)}>
-          {isSubmitSuccessful && (
-            <div className="success">
-              <p>Signup Successful</p>
-            </div>
-          )}
+         
 {/* Train number */}
           <label style={{ color: 'black' }}>Train Number:</label>
           <input
@@ -125,6 +125,7 @@ const TrainputForm = () => {
             })}
           />
           {errors.timings && <p className="err">{errors.timings.message}</p>}
+          <ToastContainer />
 
           <input type="submit" value={'Enter Train'} />
         </form>
