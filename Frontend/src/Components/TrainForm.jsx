@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import axios from "axios"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-const TrainputForm = () => {
+const TrainForm = () => {
     const {
         register,
         handleSubmit,
@@ -135,4 +135,4 @@ const TrainputForm = () => {
   )
 }
 
-export default TrainputForm
+export default TrainForm
