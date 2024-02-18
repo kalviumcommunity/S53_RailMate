@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from "axios"
-// import TrainUpdate from './TrainPutForm'
-import TrainputForm from './TrainUpdate'
+// import Animation from 
 const Home = () => {
   const [data, setData] = useState([])
 const [check,setCheck]=useState(false)
@@ -19,7 +18,8 @@ const [check,setCheck]=useState(false)
       console.log(error)
     }
   }
-  const UpdateTrain=async(id)=>{
+
+const UpdateTrain=async(id)=>{
 try {
   const UpdatedTrain = await axios.put(`https://railmate.onrender.com/UpdateTrainList/${id}`)
   console.log(UpdatedTrain)
