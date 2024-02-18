@@ -1,10 +1,10 @@
-body{
+/* body{
   text-align: center;
-}
-body{
+} */
+/* body{
   background-color: white;
   text-align: center;
-}
+} */
 .navbar img{
 width: 60px;
 cursor: pointer;
@@ -47,11 +47,7 @@ form {
   gap: 0.25rem;
 }
 
-legend {
-  background-color: #ff4500; 
-  color: white;
-  padding: 3px;
-}
+
 
 form input {
   padding: 0.5rem 0.75rem;
@@ -60,18 +56,7 @@ form input {
   border: 1px solid white;
 }
 
-form input[type="submit"] {
-  background-color: #138808; 
-  color: white;
-  margin-top: 1rem;
-  font-weight: 500;
-  transition: background-color 0.3s ease; 
-}
 
-form input[type="submit"]:hover {
-  cursor: pointer;
-  background-color: #0d5806; 
-}
 
 form label {
   font-weight: 500;
@@ -83,28 +68,12 @@ form label {
   font-size: 0.9rem;
 }
 
-.success {
-  background-color: #357BF7;
-  color: white;
-  margin: auto;
-  width: 600px;
-  text-align: center;
-}
+
 
 input {
   color: black;
 }
-@keyframes indianAnimation {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.1);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
+
 
 .form-container {
   position: relative;
@@ -124,7 +93,6 @@ input {
     #ff4500,
     #fff,
     #138808,
-    #357BF7
   ); 
   opacity: 0.2; 
   z-index: -1;
@@ -139,3 +107,239 @@ form input[type="submit"] {
 
   animation: indianAnimation 1s alternate infinite; 
 }
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.animation-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.blur {
+  filter: blur(5px);
+}
+.TrainImg{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: -40px;
+}
+.train-info {
+  border: 2px solid black;
+  width: 90vw;
+  padding: 20px;
+  display: flex;
+  margin-bottom: 20px;
+  align-items: center;
+  height: 400px;
+}
+
+.dataContainer{
+  display: flex;
+  width: 100%;
+  margin-left: -4.5%;
+  justify-content: space-around;
+
+}
+.RouteContainer{
+  display: flex;
+  align-items: center;
+  width: 50vw;
+  justify-content: space-around;
+  /* margin: auto; */
+  margin-left: 1%;
+  margin-top: -9%;
+}
+.TrainNo{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 200px;
+  font-size: 20px;
+}
+.TrainName{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 500px;
+  font-size: 20px;
+}
+.data2{
+  display: flex;
+  align-items: center;
+  width: 70vw;
+  justify-content: space-between;
+  /* margin: auto; */
+  margin-left: 3%;
+  margin-top: -10%;
+}
+.TrainRating{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 140px;
+  font-size: 20px;
+}
+.TrainTimmings{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 680px;
+  font-size: 20px;
+}
+.InputTrain{
+  width: 300px;
+  height: 30px;
+  padding: 10px 10px;
+}
+.ButtonSearch{
+  width: 300px;
+  height: 54px;
+  padding: 10px 10px;
+  background-color: rgb(91, 219, 91);
+  cursor: pointer;
+  font-size: 20px;
+  /* margin-top: 10px; */
+  border: 1px solid black;
+}
+
+.signup-container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+
+fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+legend {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #4285f4;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-size: 1em;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+input {
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 1em;
+}
+
+.err0r {
+  color: #ff0000;
+  font-size: 0.8em;
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
+
+input[type="submit"] {
+  background-color: #4285f4;
+  color: #fff;
+  cursor: pointer;
+  padding: 10px;
+  border: none;
+  border-radius: 3px;
+  font-size: 1em;
+  transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+  background-color: #3c78d8;
+}
+
+.Toastify__toast {
+  font-size: 1em;
+}
+.InputSubmit{
+  width: 300px;
+  background-color: #fff;
+
+}
+.login-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  margin-top: 10%;
+}
+fieldset {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+legend {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  color: #333;
+  margin-bottom: 5px;
+}
+
+input {
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+input[type="submit"] {
+  background-color: #4caf50;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+input[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+.err04,
+.err {
+  color: #e74c3c;
+  margin-top: 5px;
+}
+
+.Toastify__toast {
+  font-size: 16px;
+}
+
+
+

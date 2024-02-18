@@ -127,7 +127,7 @@ const TrainForm = () => {
           {errors.timings && <p className="err">{errors.timings.message}</p>}
           <ToastContainer />
 
-          <input type="submit" value={'Enter Train'} />
+          <input className='InputSubmit' type="submit" value={'Enter Train'} />
         </form>
       </fieldset>
     </div>
