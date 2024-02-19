@@ -19,7 +19,7 @@ export default function Form() {
   const formSubmitHandler = async (data) => {
     console.log("data:", data)
     try {
-      const response = await axios.post("http://localhost:3002/CreateForm", data)
+      const response = await axios.post("https://railmate.onrender.com/formcreation", data)
       console.log(response.data.data)
       showToastMessage();
     } catch (error) {

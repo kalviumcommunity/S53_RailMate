@@ -38,6 +38,7 @@ const Datatype=mongoose.Schema({
   Email:String,
   Password:Number,
   ConfirmPassword:Number,
+  DOB:String
 })
 
 

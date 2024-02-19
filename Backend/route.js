@@ -59,5 +59,23 @@ router.delete("/DeleteTrain/:id", async (req, res) => {
   }
 });
 
+//////////////////Creating the form//////////////////
 
+router.post('/formcreation', async (req, res) => {
+  try {
+    const { Email } = req.body; 
+    const user = await FormdataModel.findOne({ Email: Email });
+    if (user) {
+      return res.json({ success: false, Message: "User with this email already exists" });
+    }else{
+      
+      const newData = new FormdataModel(req.body);
+      const savedData = await newData.save();
+      res.json({ success: true, data: savedData });
+    }
+
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
 module.exports = router;

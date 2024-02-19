@@ -4,6 +4,7 @@ import axios from 'axios';
 import lottie from 'lottie-web';
 import animationData from './Animation - 1708324202222.json';
 import WrongAni from "./Wrong.json"
+
 const Login = () => {
   const {
     register,
@@ -12,6 +13,8 @@ const Login = () => {
   } = useForm();
 const [anicount,setAnicount]=useState(0)
 const [anicount2,setAnicount2]=useState(0)
+const[seterr,setnewerr]=useState("")
+const[setsucess,setnewsucess]=useState("")
   const formSubmitHandler = async (data) => {
     try {
       const response = await axios.post('http://localhost:3000/login/data', data);
@@ -21,6 +24,7 @@ const [anicount2,setAnicount2]=useState(0)
       } else {
         console.error('Unexpected response:', response.data);
         animation2()
+        setnewerr("Please Do Login with correct Credenials")
       }
     } catch (error) {
       console.error('Error:', error);
@@ -63,10 +67,10 @@ const [anicount2,setAnicount2]=useState(0)
   }, []);
 
   return (
-    <div>
-      <div id="animation-container"></div>
+    <div className='MAIN'>
+      <div id="animation-container"><p>{seterr}</p></div>
 
-      <div className="signup-container">
+      <div className="login-container">
         <fieldset>
           <legend style={{ color: 'orange' }}>Login</legend>
           <form onSubmit={handleSubmit(formSubmitHandler)}>

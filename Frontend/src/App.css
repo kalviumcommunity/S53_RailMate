@@ -282,7 +282,7 @@ input[type="submit"]:hover {
 
 }
 .login-container {
-  max-width: 400px;
+  width: 400px;
   margin: 0 auto;
   padding: 20px;
   border: 1px solid #ccc;
@@ -292,9 +292,9 @@ input[type="submit"]:hover {
   margin-top: 10%;
 }
 fieldset {
-  border: none;
+  border: 1px solid orange;
   margin: 0;
-  padding: 0;
+  padding: 15px 15px;
 }
 legend {
   font-size: 1.5em;
@@ -339,6 +339,14 @@ input[type="submit"]:hover {
 .Toastify__toast {
   font-size: 16px;
 }
-
-
-
+#animation-container{
+  width: 200px;
+  height: 200px;
+}
+.MAIN{
+  display: flex;
+  /* width: 90vw; */
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
