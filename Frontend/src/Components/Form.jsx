@@ -20,8 +20,15 @@ export default function Form() {
     console.log("data:", data)
     try {
       const response = await axios.post("https://railmate.onrender.com/formcreation", data)
-      console.log(response.data.data)
-      showToastMessage();
+      
+        if (response.data.Message=="User with this email already exists"){
+          alert("This user already exists")
+        }else{
+          showToastMessage()
+          console.log(response.data)
+        }
+      
+   
     } catch (error) {
       console.log("error:", error.message)
     }
@@ -34,19 +41,19 @@ export default function Form() {
         <form onSubmit={handleSubmit(formSubmitHandler)}>
           
 
-          <label style={{ color: 'black' }}>First Name:</label>
+          <label style={{ color: 'black' }}>Name:</label>
           <input 
             type="text"
-            name="FirstName"
-            {...register('FirstName', {
-              required: 'Please provide the First Name',
+            name="Name"
+            {...register('Name', {
+              required: 'Please provide the Name',
               minLength: {
                 value: 4,
                 message: 'Minimum four characters required',
               },
             })}
           />
-          {errors.FirstName && <p className="err0r">{errors.FirstName.message}</p>}
+          {errors.Name && <p className="err0r">{errors.Name.message}</p>}
           <label style={{ color: 'black' }}>Email:</label>
           <input
             type="email"

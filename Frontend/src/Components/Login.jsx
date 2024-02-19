@@ -11,13 +11,13 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-const [anicount,setAnicount]=useState(0)
-const [anicount2,setAnicount2]=useState(0)
-const[seterr,setnewerr]=useState("")
-const[setsucess,setnewsucess]=useState("")
+  const [anicount, setAnicount] = useState(0)
+  const [anicount2, setAnicount2] = useState(0)
+  const [seterr, setnewerr] = useState("")
+  const [setsucess, setnewsucess] = useState("")
   const formSubmitHandler = async (data) => {
     try {
-      const response = await axios.post('http://localhost:3000/login/data', data);
+      const response = await axios.post('https://railmate.onrender.com/login', data);
 
       if (response.data.Message === 'Login Success') {
         animation();
@@ -32,7 +32,7 @@ const[setsucess,setnewsucess]=useState("")
   };
 
   const animation = () => {
-    if(anicount<1){
+    if (anicount < 1) {
 
       const animationInstance = lottie.loadAnimation({
         container: document.getElementById('animation-container'),
@@ -42,10 +42,10 @@ const[setsucess,setnewsucess]=useState("")
         animationData: animationData,
       });
     }
-    setAnicount2(anicount2+1)
+    setAnicount2(anicount2 + 1)
   };
   const animation2 = () => {
-    if(anicount<1){
+    if (anicount < 1) {
 
       const animationInstance = lottie.loadAnimation({
         container: document.getElementById('animation-container'),
@@ -55,12 +55,12 @@ const[setsucess,setnewsucess]=useState("")
         animationData: WrongAni,
       });
     }
-    setAnicount(anicount+1)
+    setAnicount(anicount + 1)
 
   };
 
   useEffect(() => {
-    
+
     return () => {
       lottie.destroy();
     };

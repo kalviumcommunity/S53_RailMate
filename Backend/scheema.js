@@ -34,10 +34,10 @@ const schema = new mongoose.Schema({
   }
 });
 const Datatype=mongoose.Schema({
-  Name:String,
+  FirstName:String,
   Email:String,
-  Password:Number,
-  ConfirmPassword:Number,
+  Password:String,
+  ConfirmPassword:String,
   DOB:String
 })
 
