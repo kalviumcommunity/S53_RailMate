@@ -5,6 +5,7 @@ import lottie from 'lottie-web';
 import animationData from './Animation - 1708324202222.json';
 import WrongAni from "./Wrong.json"
 
+
 const Login = () => {
   const {
     register,
@@ -15,11 +16,13 @@ const Login = () => {
   const [anicount2, setAnicount2] = useState(0)
   const [seterr, setnewerr] = useState("")
   const [setsucess, setnewsucess] = useState("")
+  const[checklogin,setchecklogin]=useState(false)
   const formSubmitHandler = async (data) => {
     try {
       const response = await axios.post('https://railmate.onrender.com/login', data);
 
       if (response.data.Message === 'Login Success') {
+        setchecklogin(true)
         animation();
       } else {
         console.error('Unexpected response:', response.data);
@@ -30,10 +33,8 @@ const Login = () => {
       console.error('Error:', error);
     }
   };
-
   const animation = () => {
     if (anicount < 1) {
-
       const animationInstance = lottie.loadAnimation({
         container: document.getElementById('animation-container'),
         renderer: 'svg',
@@ -46,7 +47,6 @@ const Login = () => {
   };
   const animation2 = () => {
     if (anicount < 1) {
-
       const animationInstance = lottie.loadAnimation({
         container: document.getElementById('animation-container'),
         renderer: 'svg',
