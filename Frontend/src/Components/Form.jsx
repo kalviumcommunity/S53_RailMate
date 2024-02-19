@@ -12,7 +12,6 @@ export default function Form() {
     formState: { errors, isSubmitSuccessful },
     getValues,
   } = useForm();
-
   const showToastMessage = () => {
     toast.success("SignUp successful. Please Login For the Content!");
   };
