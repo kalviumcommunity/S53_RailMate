@@ -16,8 +16,6 @@ export default function Login() {
   const formSubmitHandler = async (data) => {
 console.log(data)
   };
-
-
   return (
     <div className="login-container">
       <fieldset>
@@ -26,10 +24,7 @@ console.log(data)
           {isSubmitSuccessful && (
               showToastMessage()
           )}
-
-          
-
-          <label style={{ color: 'black' }}>Email:</label>
+         <label style={{ color: 'black' }}>Email:</label>
           <input
             type="email"
             name="email"
