@@ -1,8 +1,8 @@
 const express = require("express");
-require("cors")
+
 const router = express.Router();
 const {dataModel ,FormdataModel}= require("./scheema");
-router.use(cors())
+
 
 router.get("/Train", async (req, res) => {
   try {
