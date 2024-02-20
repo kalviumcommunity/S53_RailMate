@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import lottie from 'lottie-web';
 import animationData from './Animation - 1708324202222.json';
 import WrongAni from "./Wrong.json"
-
+import { AppContext } from './ParentContext';
 
 const Login = () => {
+  // const {islogin,setislogin}= useContext(AppContext)
+
   const {
     register,
     handleSubmit,
@@ -16,13 +18,13 @@ const Login = () => {
   const [anicount2, setAnicount2] = useState(0)
   const [seterr, setnewerr] = useState("")
   const [setsucess, setnewsucess] = useState("")
-  const[checklogin,setchecklogin]=useState(false)
+ 
   const formSubmitHandler = async (data) => {
     try {
       const response = await axios.post('https://railmate.onrender.com/login', data);
 
       if (response.data.Message === 'Login Success') {
-        setchecklogin(true)
+        setislogin(true)
         animation();
       } else {
         console.error('Unexpected response:', response.data);
