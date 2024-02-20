@@ -2,6 +2,7 @@ const express = require("express");
 
 const router = express.Router();
 const { dataModel, FormdataModel } = require("./scheema");
+const Joi = require("joi");
 
 
 router.get("/Train", async (req, res) => {
@@ -60,29 +61,38 @@ router.delete("/DeleteTrain/:id", async (req, res) => {
 });
 
 //////////////////Creating the form//////////////////
-
 router.post('/formcreation', async (req, res) => {
   try {
-    const { Email } = req.body;
+    //Error Validation......
+    const { error } = FormValidation.validate(req.body); 
+    if (error) {
+      return res.json({ success: false, Message: error.details[0].message });
+    }
+    ////Checking if the user exists or not.........
+    const { Email } = req.body; 
     const user = await FormdataModel.findOne({ Email: Email });
-    if (user) {
-      return res.json({ success: false, Message: "User with this email already exists" });
-    } else {
-
+    if (user && user.Email === Email) {
+      res.json({ success: true, Message: "This user alreday exist please login with the another user name" })}
+    else{
       const newData = new FormdataModel(req.body);
       const savedData = await newData.save();
       res.json({ success: true, data: savedData });
     }
-
   } catch (error) {
     res.json({ error: error.message });
   }
 });
+
+// Login route
 router.post('/login', async (req, res) => {
   try {
-    const { Email, Password } = req.body;
-    const user = await FormdataModel.findOne({ Email: Email });
-    if (user && user.Password === Password) {
+    const { error } = FormValidation.validate(req.body);
+    if (error) {
+      return res.json({ error: error.details[0].message });
+    }
+    const{Password,Email}=req.body;
+    const user = await FormdataModel.findOne({ Email: Email,Password:Password });
+    if (user && user.Password === Password && user.Email===Email) {
       res.json({ success: true, Message: "Login Success" });
     } else {
       res.json({ error: "No record found or login data incorrect" });
@@ -91,4 +101,26 @@ router.post('/login', async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
+/////////////////////////Joi Making Validation////////////////////////
+
+const TrainFormValidation = Joi.object({
+  train_number: Joi.string().length(6).required(),
+  train_name: Joi.string().required(),
+  departure_station: Joi.string().required(),
+  destination_station: Joi.string().required(),
+  description: Joi.string().required(),
+  average_rating: Joi.number().required(),
+  reviews: Joi.array().items(Joi.string()).required(),
+  timings: Joi.string().required(),
+});
+
+const FormValidation = Joi.object({
+  FirstName: Joi.string(),
+  Email: Joi.string().email(),
+  Password: Joi.string(),
+  ConfirmPassword: Joi.string(), 
+  DOB: Joi.string(),
+});
+
 module.exports = router;
