@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import axios from "axios";
 import Lottie from "react-lottie";
 import animationData from "../Animation - 1708230937408.json";
@@ -7,12 +7,15 @@ import img from "./download.png";
 import ErrorAni from "./nofound animation.json"
 import CorrectAni from "./Correct Ani.json"
 import '../App.css';
+import { AppContext } from './ParentContext';
 
 const Home = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [blurBackground, setBlurBackground] = useState('');
   const [filterTrainNumber, setFilterTrainNumber] = useState('');
+//  const {islogin,setislogin}=useContext(AppContext)
+
 
   useEffect(() => {
     axios.get("https://railmate.onrender.com/Train")
@@ -76,7 +79,7 @@ const Home = () => {
   };
 
   return (
-    <div className={`container ${blurBackground ? 'blur(8px)' : ''}`}>
+    <div className={`container ${blurBackground ? 'blur(8px)' : ''}`} >
       <div className="filter-container">
         <input
           className='InputTrain'

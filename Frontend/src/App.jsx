@@ -1,6 +1,7 @@
 import './App.css'
 import Navbar from './Components/Navbar'
 import Allroutes from './Components/Allroutes'
+import { AppContext } from './Components/ParentContext'
 function App() {
   
 
@@ -8,6 +9,7 @@ function App() {
     <>
     <Navbar/>
     <Allroutes/>
+    <AppContext/>
           </>
   )
 }
