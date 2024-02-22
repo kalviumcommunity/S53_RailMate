@@ -4,10 +4,10 @@ import axios from 'axios';
 import lottie from 'lottie-web';
 import animationData from './Animation - 1708324202222.json';
 import WrongAni from "./Wrong.json"
-import { AppContext } from './ParentContext';
+
 
 const Login = () => {
-  // const {islogin,setislogin}= useContext(AppContext)
+
 
   const {
     register,

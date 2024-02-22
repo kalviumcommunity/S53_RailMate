@@ -7,14 +7,12 @@ import img from "./download.png";
 import ErrorAni from "./nofound animation.json"
 import CorrectAni from "./Correct Ani.json"
 import '../App.css';
-import { AppContext } from './ParentContext';
-
 const Home = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [blurBackground, setBlurBackground] = useState('');
   const [filterTrainNumber, setFilterTrainNumber] = useState('');
-//  const {islogin,setislogin}=useContext(AppContext)
+
 
 
   useEffect(() => {
