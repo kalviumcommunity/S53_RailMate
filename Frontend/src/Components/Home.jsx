@@ -6,13 +6,14 @@ import Animation2 from "../Animation.json";
 import img from "./download.png";
 import ErrorAni from "./nofound animation.json"
 import CorrectAni from "./Correct Ani.json"
+import { AppContext } from './ParentContext';
 import '../App.css';
 const Home = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [blurBackground, setBlurBackground] = useState('');
   const [filterTrainNumber, setFilterTrainNumber] = useState('');
-
+  const {login} =useContext(AppContext)
 
 
   useEffect(() => {
@@ -26,7 +27,6 @@ const Home = () => {
         setLoading(false);
       });
   }, []);
-
   const handleSearch = () => {
     setLoading(true);
     const filteredData = data.filter(train => train.train_number.includes(filterTrainNumber));
@@ -141,7 +141,9 @@ const Home = () => {
         </div>
       ) : (
         data.map((e, i) => (
-          <div key={e._id} className="train-info">
+          <div key={e._id} className="train-info" style={{
+            filter:login ? "blur(0px)" : "blur(8px)"
+          }}>
             <div className="TrainImg">
               <h1 className='Railmitra'>
                 <span style={{ color: 'orange' }}>Rail</span>

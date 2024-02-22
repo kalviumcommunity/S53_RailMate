@@ -95,7 +95,7 @@ router.post('/login', async (req, res) => {
     if (user && user.Password === Password && user.Email===Email) {
       res.json({ success: true, Message: "Login Success" });
     } else {
-      res.json({ error: "No record found or login data incorrect" });
+      res.json({ Message:"Login Failed"});
     }
   } catch (error) {
     res.status(500).json({ error: error.message });

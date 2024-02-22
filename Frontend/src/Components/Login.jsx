@@ -18,18 +18,31 @@ const Login = () => {
   const [anicount2, setAnicount2] = useState(0)
   const [seterr, setnewerr] = useState("")
   const [setsucess, setnewsucess] = useState("")
+  const [formdata,setFormdata]=useState([])
+ 
  
   const formSubmitHandler = async (data) => {
+    // reset()
     try {
       const response = await axios.post('https://railmate.onrender.com/login', data);
-
+console.log(response)
       if (response.data.Message === 'Login Success') {
-        setislogin(true)
+
         animation();
-      } else {
-        console.error('Unexpected response:', response.data);
+        const newData = [...formdata, data.Email];
+        const storeddata = JSON.parse(localStorage.getItem("LoginData")) || []
+        const Datacheck = storeddata.some(item => JSON.stringify(item.Email) === JSON.stringify(data.Email));
+        if (!Datacheck) {
+          const updatedData = [...storeddata, { Email: data.Email }];
+          localStorage.setItem("LoginData", JSON.stringify(updatedData));
+          setFormdata(newData);
+        } else {
+          alert("The user has already")
+        }
+        
+      } 
+      else if (response.data.Message==="Login Failed"){
         animation2()
-        setnewerr("Please Do Login with correct Credenials")
       }
     } catch (error) {
       console.error('Error:', error);
@@ -45,10 +58,10 @@ const Login = () => {
         animationData: animationData,
       });
     }
-    setAnicount2(anicount2 + 1)
+    setAnicount(anicount + 1)
   };
   const animation2 = () => {
-    if (anicount < 1) {
+    if (anicount2 < 1) {
       const animationInstance = lottie.loadAnimation({
         container: document.getElementById('animation-container'),
         renderer: 'svg',
@@ -57,7 +70,7 @@ const Login = () => {
         animationData: WrongAni,
       });
     }
-    setAnicount(anicount + 1)
+    setAnicount2(anicount2 + 1)
 
   };
 
