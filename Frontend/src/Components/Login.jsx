@@ -1,89 +1,65 @@
-import React, { useEffect, useState,useContext } from 'react';
+import React, { useEffect, useState , useContext} from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import lottie from 'lottie-web';
-import animationData from './Animation - 1708324202222.json';
-import WrongAni from "./Wrong.json"
-
+import WrongAni from "./Wrong.json";
+import { Link, useNavigate } from 'react-router-dom';
+import { AppContext } from './ParentContext';
 
 const Login = () => {
-
-
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const [anicount, setAnicount] = useState(0)
-  const [anicount2, setAnicount2] = useState(0)
-  const [seterr, setnewerr] = useState("")
-  const [setsucess, setnewsucess] = useState("")
-  const [formdata,setFormdata]=useState([])
- 
- 
+  const [formdata, setFormdata] = useState([]);
+  const {login, setlogin} = useContext(AppContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    let data = localStorage.getItem("isLoggedIn");
+
+    if (data === "true") {
+      navigate("/");
+    }
+
+  }, []);
+
   const formSubmitHandler = async (data) => {
-    // reset()
     try {
       const response = await axios.post('https://railmate.onrender.com/login', data);
-console.log(response)
-      if (response.data.Message === 'Login Success') {
 
-        animation();
+      if (response.data.Message === 'Login Success') {
+        setlogin(true);
         const newData = [...formdata, data.Email];
-        const storeddata = JSON.parse(localStorage.getItem("LoginData")) || []
-        const Datacheck = storeddata.some(item => JSON.stringify(item.Email) === JSON.stringify(data.Email));
-        if (!Datacheck) {
-          const updatedData = [...storeddata, { Email: data.Email }];
-          localStorage.setItem("LoginData", JSON.stringify(updatedData));
-          setFormdata(newData);
-        } else {
-          alert("The user has already")
-        }
-        
-      } 
-      else if (response.data.Message==="Login Failed"){
-        animation2()
+
+        localStorage.setItem("LoginData", JSON.stringify(newData));
+        localStorage.setItem("isLoggedIn", true);
+        setFormdata(newData);
+
+        navigate("/");
+      }
+      else if (response.data.Message === "Login Failed") {
+        animation2();
       }
     } catch (error) {
       console.error('Error:', error);
     }
   };
-  const animation = () => {
-    if (anicount < 1) {
-      const animationInstance = lottie.loadAnimation({
-        container: document.getElementById('animation-container'),
-        renderer: 'svg',
-        loop: true,
-        autoplay: true,
-        animationData: animationData,
-      });
-    }
-    setAnicount(anicount + 1)
-  };
+
   const animation2 = () => {
-    if (anicount2 < 1) {
-      const animationInstance = lottie.loadAnimation({
-        container: document.getElementById('animation-container'),
-        renderer: 'svg',
-        loop: true,
-        autoplay: true,
-        animationData: WrongAni,
-      });
-    }
-    setAnicount2(anicount2 + 1)
-
+    const animationInstance = lottie.loadAnimation({
+      container: document.getElementById('animation-container'),
+      renderer: 'svg',
+      loop: true,
+      autoplay: true,
+      animationData: WrongAni,
+    });
   };
-
-  useEffect(() => {
-
-    return () => {
-      lottie.destroy();
-    };
-  }, []);
 
   return (
     <div className='MAIN'>
-      <div id="animation-container"><p>{seterr}</p></div>
+      <div id="animation-container"></div>
 
       <div className="login-container">
         <fieldset>
