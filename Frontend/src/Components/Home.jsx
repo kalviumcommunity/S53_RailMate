@@ -8,17 +8,19 @@ import ErrorAni from "./nofound animation.json"
 import CorrectAni from "./Correct Ani.json"
 import { AppContext } from './ParentContext';
 import '../App.css';
+
 const Home = () => {
+  const [originalData, setOriginalData] = useState([]);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [blurBackground, setBlurBackground] = useState('');
   const [filterTrainNumber, setFilterTrainNumber] = useState('');
-  const {login} =useContext(AppContext)
-
+  const { login } = useContext(AppContext);
 
   useEffect(() => {
     axios.get("https://railmate.onrender.com/Train")
       .then(res => {
+        setOriginalData(res.data);
         setData(res.data);
         setLoading(false);
       })
@@ -27,22 +29,15 @@ const Home = () => {
         setLoading(false);
       });
   }, []);
+
   const handleSearch = () => {
     setLoading(true);
-    const filteredData = data.filter(train => train.train_number.includes(filterTrainNumber));
+    const filteredData = originalData.filter(train => train.train_number.includes(filterTrainNumber));
     setData(filteredData);
     setLoading(false);
   };
-
-  const handleAnimationStart = () => {
-    setBlurBackground(true);
-  };
-
-  const handleAnimationComplete = () => {
-    setBlurBackground(false);
-  };
-
   const animationOptions = {
+
     loop: true,
     autoplay: true,
     animationData: animationData,
@@ -52,6 +47,7 @@ const Home = () => {
   };
 
   const animationOptions2 = {
+
     loop: true,
     autoplay: true,
     animationData: Animation2,
@@ -59,7 +55,9 @@ const Home = () => {
       preserveAspectRatio: 'xMidYMid slice',
     },
   };
+
   const WrongAnimation = {
+    // Replace with your animation options
     loop: true,
     autoplay: true,
     animationData: ErrorAni,
@@ -67,7 +65,9 @@ const Home = () => {
       preserveAspectRatio: 'xMidYMid slice',
     },
   };
+
   const CorrectAnimat = {
+    // Replace with your animation options
     loop: true,
     autoplay: true,
     animationData: CorrectAni,
@@ -75,19 +75,18 @@ const Home = () => {
       preserveAspectRatio: 'xMidYMid slice',
     },
   };
-
   return (
-    <div className={`container ${blurBackground ? 'blur(8px)' : ''}`} >
+    <div className={`container ${blurBackground ? 'blur(8px)' : ''}`}>
       <div className="filter-container">
         <input
           className='InputTrain'
           type="text"
-          value={filterTrainNumber}
           onChange={(e) => setFilterTrainNumber(e.target.value)}
           placeholder='Search Train By Number'
         />
         <button className='ButtonSearch' onClick={handleSearch}>Search</button>
       </div>
+
       {loading && (
         <div className="animation-container">
           <Lottie
@@ -107,17 +106,17 @@ const Home = () => {
           />
           <h1 style={{
             display: "flex",
-            alignItems:"center"
+            alignItems: "center"
 
           }}><Lottie
-              options={WrongAnimation}
-              height={50}
-              width={50}
-            />  <span style={{
-              color: 'orange',
-              textAlign: "center",
-              alignItems:"center"
-            }}>No</span>
+            options={WrongAnimation}
+            height={50}
+            width={50}
+          />  <span style={{
+            color: 'orange',
+            textAlign: "center",
+            alignItems: "center"
+          }}>No</span>
             <span style={{ color: 'orange' }}>Train </span>
             <span style={{ color: 'green' }}>Found </span>  <Lottie
               options={WrongAnimation}
@@ -125,24 +124,22 @@ const Home = () => {
               width={50}
             /></h1>
 
-
-
           <h1 style={{
             display: "flex"
           }}><Lottie
-          options={CorrectAnimat}
-          height={50}
-          width={50}
-        /> <span style={{ color: "orange" }}>Please Enter the correct train Number </span><Lottie
-        options={CorrectAnimat}
-        height={50}
-        width={50}
-      /></h1>
+            options={CorrectAnimat}
+            height={50}
+            width={50}
+          /> <span style={{ color: "orange" }}>Please Enter the correct train Number </span><Lottie
+            options={CorrectAnimat}
+            height={50}
+            width={50}
+          /></h1>
         </div>
       ) : (
         data.map((e, i) => (
           <div key={e._id} className="train-info" style={{
-            filter:login ? "blur(0px)" : "blur(8px)"
+            filter: login ? "blur(0px)" : "blur(8px)"
           }}>
             <div className="TrainImg">
               <h1 className='Railmitra'>
