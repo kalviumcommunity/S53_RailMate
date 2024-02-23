@@ -100,22 +100,7 @@ router.post('/login', async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
-});
-/////checkuser......
-router.post('/checkuser', async (req, res) => {
-  try {
-    const { error } = FormValidation.validate(req.body);
-    if (error) {
-      return res.json({ error: error.details[0].message });
-    }
-    const{Email}=req.body;
-    const user = await FormdataModel.findOne({ Email: Email });
-    if (user && user.Email === Email) {
-      res.json({ success: true, Message: "This user alreday exist please login with the another user name" })}
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
+})
 
 /////////////////////////Joi Making Validation////////////////////////
 

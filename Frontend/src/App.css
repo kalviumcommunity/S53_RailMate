@@ -366,4 +366,41 @@ input[type="submit"]:hover {
   border-radius: 8px;
 }
 
+button.update {
+  background-color: #4caf50; 
+  color: white;
+  padding: 10px 20px; 
+  border: none; 
+  border-radius: 5px; 
+  cursor: pointer; 
+}
 
+
+button.Delete {
+  background-color: #f44336; 
+  color: white; 
+  padding: 10px 20px;
+  border: none; 
+  border-radius: 5px; 
+  cursor: pointer; 
+}
+.putreq{
+  /* margin-top: 30%; */
+  margin-left: -19%;
+}
+.reviews p {
+  border: 1px solid black;
+  width: 250px;
+  padding: 10px;
+  font-size: 15px;
+  transition: transform 0.3s ease-out; 
+}
+.reviews p:hover {
+  transform: scale(1.1); 
+}
+.reviews{
+  display: flex;
+  text-align: center;
+  justify-content: space-around;
+
+}
