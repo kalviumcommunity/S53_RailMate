@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Login from './Login';
+import logo from "./trainlogo.png"
 import { AppContext } from './ParentContext';
 
 const Navbar = () => {
@@ -23,11 +24,11 @@ const Navbar = () => {
     <div className='navbar' style={{
       display: "flex",
       justifyContent: "space-around",
-      width: "95vw",
+      width: "100vw",
       boxShadow: "2px",
     }}>
       <Link to={"/Home"}>
-        <img src="https://yt3.googleusercontent.com/V284HyHaLxisGi-7Ew7E2hdaLwwWLp47oDaF_SAKHXYCMkusoCWGTLOFOcmEnLGAHhv1j9WNPQ=s900-c-k-c0x00ffffff-no-rj" width={"50px"} alt="" />
+        <img src={logo} width={"50px"} alt="" />
       </Link>
       <div className="main" style={{
         display: "flex",

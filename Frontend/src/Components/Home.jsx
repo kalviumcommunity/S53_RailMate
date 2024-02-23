@@ -7,6 +7,7 @@ import img from "./download.png";
 import ErrorAni from "./nofound animation.json"
 import CorrectAni from "./Correct Ani.json"
 import { AppContext } from './ParentContext';
+import loginani from "./LoginAni.json"
 import '../App.css';
 
 const Home = () => {
@@ -37,7 +38,6 @@ const Home = () => {
     setLoading(false);
   };
   const animationOptions = {
-
     loop: true,
     autoplay: true,
     animationData: animationData,
@@ -47,7 +47,6 @@ const Home = () => {
   };
 
   const animationOptions2 = {
-
     loop: true,
     autoplay: true,
     animationData: Animation2,
@@ -55,9 +54,16 @@ const Home = () => {
       preserveAspectRatio: 'xMidYMid slice',
     },
   };
+  const LoginAnimation = {
+    loop: true,
+    autoplay: true,
+    animationData: loginani,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice',
+    },
+  };
 
   const WrongAnimation = {
-    // Replace with your animation options
     loop: true,
     autoplay: true,
     animationData: ErrorAni,
@@ -67,7 +73,6 @@ const Home = () => {
   };
 
   const CorrectAnimat = {
-    // Replace with your animation options
     loop: true,
     autoplay: true,
     animationData: CorrectAni,
@@ -96,7 +101,7 @@ const Home = () => {
           />
         </div>
       )}
-
+       
       {!loading && data.length === 0 ? (
         <div className="animation-container">
           <Lottie
@@ -139,8 +144,8 @@ const Home = () => {
       ) : (
         data.map((e, i) => (
           <div key={e._id} className="train-info" style={{
-            filter: login ? "blur(0px)" : "blur(8px)"
-          }}>
+            filter: login ? "blur(0px)" : "blur(8px)",
+            }}>
             <div className="TrainImg">
               <h1 className='Railmitra'>
                 <span style={{ color: 'orange' }}>Rail</span>
@@ -165,6 +170,8 @@ const Home = () => {
               <p>{e.reviews}</p>
               <p>{e.description}</p>
             </div>
+            <button className="update">Update</button>
+            <button className="Delete">Delete</button>
           </div>
         ))
       )}

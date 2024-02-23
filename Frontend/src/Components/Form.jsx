@@ -14,26 +14,26 @@ export default function Form() {
     getValues,
   } = useForm();
   const showToastMessage = () => {
-    toast.success("SignUp successful. Please Login For the Content!");
+    toast.success("SignUp successful 😊.!");
   };
 
   const formSubmitHandler = async (data) => {
-    console.log("data:", data)
+    console.log("data:", data);
+  
     try {
-      const response = await axios.post("https://railmate.onrender.com/formcreation", data)
-      
-        if (response.data.Message=="User with this email already exists"){
-          alert("This user already exists")
-        }else{
-          showToastMessage()
-          console.log(response.data)
-        }
-      
-   
+      const checkUserResponse = await axios.post("https://railmate.onrender.com/checkuser", { email: data.email });
+      if (checkUserResponse.data.Message === "This user alreday exist please login with the another user name") {
+        alert("This user already exists");
+      } else {
+        const response = await axios.post("https://railmate.onrender.com/formcreation", data);
+        showToastMessage();
+        console.log(response.data);
+      }
     } catch (error) {
-      console.log("error:", error.message)
+      console.log("error:", error.message);
     }
   };
+  
 
   return (
     <div className="signup-container">
@@ -45,16 +45,11 @@ export default function Form() {
           <label style={{ color: 'black' }}>Name:</label>
           <input 
             type="text"
-            name="Name"
-            {...register('Name', {
-              required: 'Please provide the Name',
-              minLength: {
-                value: 4,
-                message: 'Minimum four characters required',
-              },
-            })}
+            name="FirstName"
+            {...register('FirstName', {
+              required: 'Please provide the Name',})}
           />
-          {errors.Name && <p className="err0r">{errors.Name.message}</p>}
+          {errors.FirstName && <p className="err0r">{errors.FirstName.message}</p>}
           <label style={{ color: 'black' }}>Email:</label>
           <input
             type="email"
