@@ -21,6 +21,7 @@ cursor: pointer;
   justify-content: space-between;
   background-color: azure;
   box-shadow: 1px 4px grey;
+  
 }
 .form-container {
   display: flex;
@@ -350,4 +351,19 @@ input[type="submit"]:hover {
   justify-content: space-around;
   align-items: center;
 }
+.Loginstatus {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ff9933; /* Saffron color */
+  color: #fff; /* White text color for better visibility */
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
 

@@ -3,6 +3,12 @@ import { useForm } from 'react-hook-form';
 import axios from "axios"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { AppContext } from './ParentContext';
+import { useContext } from "react"
+import { Link } from 'react-router-dom';
+import Lottie from "react-lottie";
+import indainani from "./Indian Animation.json"
+
 const TrainForm = () => {
     const {
         register,
@@ -12,6 +18,7 @@ const TrainForm = () => {
         const showToastMessage = () => {
             toast.success("Train Added Sucessfully!");
         };
+        const {login}=useContext(AppContext)
   const formSubmitHandler = async (data) => {
     //   console.log("data:",data)
       try {
@@ -21,12 +28,24 @@ const TrainForm = () => {
             console.log("error:",error.message)
         }
     };
+    const IndianAnimation = {
 
+      loop: true,
+      autoplay: true,
+      animationData: indainani,
+      rendererSettings: {
+        preserveAspectRatio: 'xMidYMid slice',
+      },
+    };
 
     return (
+      
         <div>
-  {isSubmitSuccessful && showToastMessage()}
-    <div className="form-container">
+          {login ? ( 
+    <div className="form-container" style={{
+      filter: login ? "blur(0px)" : "blur(8px)"
+    }}>
+      {isSubmitSuccessful && showToastMessage()}
       <fieldset>
         <legend>Bharatiya Rail</legend>
         <form onSubmit={handleSubmit(formSubmitHandler)}>
@@ -130,7 +149,10 @@ const TrainForm = () => {
           <input className='InputSubmit' type="submit" value={'Enter Train'} />
         </form>
       </fieldset>
-    </div>
+    </div>): (<div className='Toastcontainer'><Lottie options={IndianAnimation}
+            height={200}
+            width={200}/><Link to={"/Login"}><h1 className='Loginstatus'>Please Login to add data</h1></Link></div>) }
+ 
     </div>
   )
 }
