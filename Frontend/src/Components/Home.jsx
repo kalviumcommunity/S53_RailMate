@@ -17,32 +17,32 @@ const Home = () => {
   const [blurBackground, setBlurBackground] = useState('');
   const [filterTrainNumber, setFilterTrainNumber] = useState('');
   const { login } = useContext(AppContext);
-  const fetchData = () => {
-    axios.get("https://railmate.onrender.com/Train")
-    .then(res => {
-      setOriginalData(res.data);
-      setData(res.data);
-      setLoading(false);
-    })
-    .catch(err => {
-      console.log("err", err);
-      setLoading(false);
-    });
-  };
-  useEffect(() => {
-    
-    fetchData();
-  }, []); 
+
   
-  const delete_train=async(id)=>{
-  try {
-    const deletedata=await axios.delete(`https://railmate.onrender.com/DeleteTrain/${id}`)
-    console.log(deletedata)
-    fetchData()
-  } catch (error) {
-    console.log(error)
-  }
-  }
+  
+
+
+const delete_train=async(id)=>{
+try {
+  const deletedata=await axios.delete(`https://railmate.onrender.com/DeleteTrain/${id}`)
+  console.log(deletedata)
+} catch (error) {
+  console.log(error)
+}
+}
+  useEffect(() => {
+    axios.get("https://railmate.onrender.com/Train")
+      .then(res => {
+        setOriginalData(res.data);
+        setData(res.data);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.log("err", err);
+        setLoading(false);
+      });
+  }, []);
+
 
 
     const filteredData = data.filter(train => train.train_number.includes(filterTrainNumber));
