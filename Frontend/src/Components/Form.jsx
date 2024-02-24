@@ -6,7 +6,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function Form() {
-  
+
   const {
     register,
     handleSubmit,
@@ -16,14 +16,15 @@ export default function Form() {
   const showToastMessage = () => {
     toast.success("SignUp successful 😊.!");
   };
+  const showToastMessage2 = () => {
+    toast.error("This user Already exits");
+  };
 
   const formSubmitHandler = async (data) => {
-    console.log("data:", data);
-  
     try {
-      const checkUserResponse = await axios.post("https://railmate.onrender.com/checkuser", { email: data.email });
+      const checkUserResponse = await axios.post("https://railmate.onrender.com/formcreation", data);
       if (checkUserResponse.data.Message === "This user alreday exist please login with the another user name") {
-        alert("This user already exists");
+        showToastMessage2()
       } else {
         const response = await axios.post("https://railmate.onrender.com/formcreation", data);
         showToastMessage();
@@ -33,21 +34,22 @@ export default function Form() {
       console.log("error:", error.message);
     }
   };
-  
+
 
   return (
     <div className="signup-container">
       <fieldset>
-        <legend style={{color:"orange"}}>Signup</legend>
+        <legend style={{ color: "orange" }}>Signup</legend>
         <form onSubmit={handleSubmit(formSubmitHandler)}>
-          
+
 
           <label style={{ color: 'black' }}>Name:</label>
-          <input 
+          <input
             type="text"
             name="FirstName"
             {...register('FirstName', {
-              required: 'Please provide the Name',})}
+              required: 'Please provide the Name',
+            })}
           />
           {errors.FirstName && <p className="err0r">{errors.FirstName.message}</p>}
           <label style={{ color: 'black' }}>Email:</label>
