@@ -17,7 +17,24 @@ const Home = () => {
   const [blurBackground, setBlurBackground] = useState('');
   const [filterTrainNumber, setFilterTrainNumber] = useState('');
   const { login } = useContext(AppContext);
+<<<<<<< HEAD
   const fetchData = () => {
+=======
+
+  
+  
+
+
+const delete_train=async(id)=>{
+try {
+  const deletedata=await axios.delete(`https://railmate.onrender.com/DeleteTrain/${id}`)
+  console.log(deletedata)
+} catch (error) {
+  console.log(error)
+}
+}
+  useEffect(() => {
+>>>>>>> 7b3a46eecbf82e73c30f6c734f92e7bd548c80e1
     axios.get("https://railmate.onrender.com/Train")
     .then(res => {
       setOriginalData(res.data);
