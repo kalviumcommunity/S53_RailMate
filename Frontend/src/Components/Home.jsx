@@ -17,26 +17,37 @@ const Home = () => {
   const [blurBackground, setBlurBackground] = useState('');
   const [filterTrainNumber, setFilterTrainNumber] = useState('');
   const { login } = useContext(AppContext);
-
-  useEffect(() => {
+  const fetchData = () => {
     axios.get("https://railmate.onrender.com/Train")
-      .then(res => {
-        setOriginalData(res.data);
-        setData(res.data);
-        setLoading(false);
-      })
-      .catch(err => {
-        console.log("err", err);
-        setLoading(false);
-      });
-  }, []);
-
-  const handleSearch = () => {
-    setLoading(true);
-    const filteredData = originalData.filter(train => train.train_number.includes(filterTrainNumber));
-    setData(filteredData);
-    setLoading(false);
+    .then(res => {
+      setOriginalData(res.data);
+      setData(res.data);
+      setLoading(false);
+    })
+    .catch(err => {
+      console.log("err", err);
+      setLoading(false);
+    });
   };
+  useEffect(() => {
+    
+    fetchData();
+  }, []); 
+  
+  const delete_train=async(id)=>{
+  try {
+    const deletedata=await axios.delete(`https://railmate.onrender.com/DeleteTrain/${id}`)
+    console.log(deletedata)
+    fetchData()
+  } catch (error) {
+    console.log(error)
+  }
+  }
+
+
+    const filteredData = data.filter(train => train.train_number.includes(filterTrainNumber));
+
+ 
   const animationOptions = {
     loop: true,
     autoplay: true,
@@ -54,15 +65,6 @@ const Home = () => {
       preserveAspectRatio: 'xMidYMid slice',
     },
   };
-  const LoginAnimation = {
-    loop: true,
-    autoplay: true,
-    animationData: loginani,
-    rendererSettings: {
-      preserveAspectRatio: 'xMidYMid slice',
-    },
-  };
-
   const WrongAnimation = {
     loop: true,
     autoplay: true,
@@ -89,7 +91,6 @@ const Home = () => {
           onChange={(e) => setFilterTrainNumber(e.target.value)}
           placeholder='Search Train By Number'
         />
-        <button className='ButtonSearch' onClick={handleSearch}>Search</button>
       </div>
 
       {loading && (
@@ -102,7 +103,7 @@ const Home = () => {
         </div>
       )}
        
-      {!loading && data.length === 0 ? (
+      {!loading && filteredData.length === 0 ? (
         <div className="animation-container">
           <Lottie
             options={animationOptions}
@@ -142,7 +143,7 @@ const Home = () => {
           /></h1>
         </div>
       ) : (
-        data.map((e, i) => (
+        filteredData.map((e, i) => (
           <div key={e._id} className="train-info" style={{
             filter: login ? "blur(0px)" : "blur(8px)",
             }}>
@@ -167,11 +168,15 @@ const Home = () => {
                 <p className='TrainRating'><h2>Rating:</h2> {e.average_rating}</p>
                 <p className='TrainTimmings'><h2>Timmings:</h2>{e.timings}</p>
               </div>
+              <div className="reviews">
               <p>{e.reviews}</p>
               <p>{e.description}</p>
-            </div>
+              </div>
+              <div className='putreq'>
             <button className="update">Update</button>
-            <button className="Delete">Delete</button>
+            <button className="Delete" onClick={()=>{delete_train(e._id)}}>Delete</button></div>
+            </div >
+         
           </div>
         ))
       )}
