@@ -385,6 +385,7 @@ button.Delete {
   padding: 10px;
   font-size: 15px;
   transition: transform 0.3s ease-out; 
+  /* text-align: center; */
 }
 .reviews p:hover {
   transform: scale(1.1); 
@@ -393,5 +394,6 @@ button.Delete {
   display: flex;
   text-align: center;
   justify-content: space-around;
+  align-items: center;
 
 }

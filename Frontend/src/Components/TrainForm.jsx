@@ -79,6 +79,15 @@ const TrainForm = () => {
               required: 'Enter train_name'})}
           />
           {errors.train_name && <p className="err">{errors.train_name.message}</p>}
+          {/* Train start Region */}
+          <label style={{ color: 'black' }}>Region:</label>
+          <input
+            type="text"
+            name="region"
+            {...register('region', {
+              required: 'Enter region'})}
+          />
+          {errors.region && <p className="err">{errors.region.message}</p>}
 {/* Train depautrure station */}
 
           <label style={{ color: 'black' }}>Depature Station:</label>
@@ -91,7 +100,7 @@ const TrainForm = () => {
           {errors.departure_station && <p className="err">{errors.departure_station.message}</p>}
 {/* Train destination station */}
 
-          <label style={{ color: 'black' }}>destination_station:</label>
+          <label style={{ color: 'black' }}>Destination Station:</label>
           <input
             type="text"
             name="destination_station"
@@ -137,7 +146,7 @@ const TrainForm = () => {
 
           <label style={{ color: 'black' }}>Timings:</label>
           <input
-            type="number"
+            type="text"
             name="timings"
             {...register('timings', {
               required: 'Enter timings'
