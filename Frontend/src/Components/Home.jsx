@@ -31,14 +31,14 @@ const Home = () => {
     });
   }
 
-const delete_train=async(id)=>{
-try {
-  const deletedata=await axios.delete(`https://railmate.onrender.com/DeleteTrain/${id}`)
-  console.log(deletedata)
-} catch (error) {
-  console.log(error)
-}
-}
+  const delete_train = async (id) => {
+    try {
+      await axios.delete(`https://railmate.onrender.com/DeleteTrain/${id}`);
+      fetchData();
+    } catch (error) {
+      console.log(error);
+    }
+  }
  
   useEffect(() => {
     
@@ -47,7 +47,7 @@ try {
   
  
 
-    const filteredData = data.filter(train => train.train_number.includes(filterTrainNumber));
+const filteredData = data.filter(train => train.train_number.includes(filterTrainNumber));
 
  
   const animationOptions = {
