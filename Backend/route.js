@@ -111,6 +111,7 @@ const TrainFormValidation = Joi.object({
   destination_station: Joi.string().required(),
   description: Joi.string().required(),
   average_rating: Joi.number().required(),
+  region: Joi.string().required(),
   reviews: Joi.array().items(Joi.string()).required(),
   timings: Joi.string().required(),
 });

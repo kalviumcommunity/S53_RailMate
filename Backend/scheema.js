@@ -20,6 +20,10 @@ const schema = new mongoose.Schema({
     type : String,
     require : true
   },
+  region:{
+    type : String,
+    require : true
+  },
   average_rating : {
     type : Number,
     require : true

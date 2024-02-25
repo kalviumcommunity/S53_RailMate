@@ -1,14 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
-import axios from "axios";
-import Lottie from "react-lottie";
-import animationData from "../Animation - 1708230937408.json";
-import Animation2 from "../Animation.json";
-import img from "./download.png";
-import ErrorAni from "./nofound animation.json"
-import CorrectAni from "./Correct Ani.json"
+import axios from 'axios';
+import Lottie from 'react-lottie';
+import animationData from '../Animation - 1708230937408.json';
+import Animation2 from '../Animation.json';
+import img from './download.png';
+import ErrorAni from './nofound animation.json';
+import CorrectAni from './Correct Ani.json';
 import { AppContext } from './ParentContext';
-import loginani from "./LoginAni.json"
 import '../App.css';
+import FilterByRegion from './FilterByRegion';
 
 const Home = () => {
   const [originalData, setOriginalData] = useState([]);
@@ -16,20 +16,21 @@ const Home = () => {
   const [loading, setLoading] = useState(true);
   const [blurBackground, setBlurBackground] = useState('');
   const [filterTrainNumber, setFilterTrainNumber] = useState('');
+  const [selectedRegion, setSelectedRegion] = useState('');
   const { login } = useContext(AppContext);
 
   const fetchData = () => {
-    axios.get("https://railmate.onrender.com/Train")
-    .then(res => {
-      setOriginalData(res.data);
-      setData(res.data);
-      setLoading(false);
-    })
-    .catch(err => {
-      console.log("err", err);
-      setLoading(false);
-    });
-  }
+    axios.get('https://railmate.onrender.com/Train')
+      .then((res) => {
+        setOriginalData(res.data);
+        setData(res.data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log('err', err);
+        setLoading(false);
+      });
+  };
 
   const delete_train = async (id) => {
     try {
@@ -38,18 +39,18 @@ const Home = () => {
     } catch (error) {
       console.log(error);
     }
-  }
- 
+  };
+
   useEffect(() => {
-    
     fetchData();
-  }, []); 
-  
- 
+  }, []);
 
-const filteredData = data.filter(train => train.train_number.includes(filterTrainNumber));
+  function FilteredData(filteredValue) {
+    return data.filter((train) => train.region.includes(filteredValue));
+  }
 
- 
+  const filteredData = FilteredData(selectedRegion).filter((train) => train.train_number.includes(filterTrainNumber));
+
   const animationOptions = {
     loop: true,
     autoplay: true,
@@ -67,6 +68,7 @@ const filteredData = data.filter(train => train.train_number.includes(filterTrai
       preserveAspectRatio: 'xMidYMid slice',
     },
   };
+
   const WrongAnimation = {
     loop: true,
     autoplay: true,
@@ -84,15 +86,32 @@ const filteredData = data.filter(train => train.train_number.includes(filterTrai
       preserveAspectRatio: 'xMidYMid slice',
     },
   };
+
   return (
     <div className={`container ${blurBackground ? 'blur(8px)' : ''}`}>
-      <div className="filter-container">
+      <div className="filter-container" style={{
+        display: 'flex',
+        justifyContent: 'space-around',
+        width: '70vw',
+      }}>
         <input
           className='InputTrain'
           type="text"
           onChange={(e) => setFilterTrainNumber(e.target.value)}
           placeholder='Search Train By Number'
         />
+        <div className="filter" style={{
+          border: '2px solid black',
+          padding: '10px 10px',
+          width: '70px',
+        }}>
+
+          <FilterByRegion
+            FilteredData={(filteredValue) => {
+              setSelectedRegion(filteredValue);
+            }}
+          />
+        </div>
       </div>
 
       {loading && (
@@ -104,7 +123,7 @@ const filteredData = data.filter(train => train.train_number.includes(filterTrai
           />
         </div>
       )}
-       
+
       {!loading && filteredData.length === 0 ? (
         <div className="animation-container">
           <Lottie
@@ -113,17 +132,16 @@ const filteredData = data.filter(train => train.train_number.includes(filterTrai
             width={200}
           />
           <h1 style={{
-            display: "flex",
-            alignItems: "center"
-
+            display: 'flex',
+            alignItems: 'center',
           }}><Lottie
             options={WrongAnimation}
             height={50}
             width={50}
           />  <span style={{
             color: 'orange',
-            textAlign: "center",
-            alignItems: "center"
+            textAlign: 'center',
+            alignItems: 'center',
           }}>No</span>
             <span style={{ color: 'orange' }}>Train </span>
             <span style={{ color: 'green' }}>Found </span>  <Lottie
@@ -133,22 +151,22 @@ const filteredData = data.filter(train => train.train_number.includes(filterTrai
             /></h1>
 
           <h1 style={{
-            display: "flex"
+            display: 'flex',
           }}><Lottie
             options={CorrectAnimat}
             height={50}
             width={50}
-          /> <span style={{ color: "orange" }}>Please Enter the correct train Number </span><Lottie
+          /> <span style={{ color: 'orange' }}>Please Enter the correct train Number </span><Lottie
             options={CorrectAnimat}
             height={50}
             width={50}
           /></h1>
         </div>
       ) : (
-        filteredData.map((e, i) => (
+        filteredData.map((e) => (
           <div key={e._id} className="train-info" style={{
-            filter: login ? "blur(0px)" : "blur(8px)",
-            }}>
+            filter: login ? 'blur(0px)' : 'blur(8px)',
+          }}>
             <div className="TrainImg">
               <h1 className='Railmitra'>
                 <span style={{ color: 'orange' }}>Rail</span>
@@ -168,17 +186,21 @@ const filteredData = data.filter(train => train.train_number.includes(filterTrai
               </div>
               <div className="data2">
                 <p className='TrainRating'><h2>Rating:</h2> {e.average_rating}</p>
-                <p className='TrainTimmings'><h2>Timmings:</h2>{e.timings}</p>
+                <p className='TrainTimmings'><h2>Timings:</h2>{e.timings}</p>
               </div>
-              <div className="reviews">
-              <p>{e.reviews}</p>
-              <p>{e.description}</p>
+              <div className="reviews" >
+                <p><strong>{e.reviews}</strong></p>
+                <p><strong>{e.description}</strong></p>
+                <p style={{
+                  fontSize: '20px',
+                  textAlign: 'center',
+                }}> <strong>{e.region}</strong></p>
               </div>
               <div className='putreq'>
-            <button className="update">Update</button>
-            <button className="Delete" onClick={()=>{delete_train(e._id)}}>Delete</button></div>
+                <button className="update">Update</button>
+                <button className="Delete" onClick={() => { delete_train(e._id); }}>Delete</button></div>
             </div >
-         
+
           </div>
         ))
       )}
