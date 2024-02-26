@@ -30,19 +30,23 @@ router.post("/CreateTrain", async (req, res) => {
 });
 
 
-////////////////////////////////////////
+////////////////////////////////////////Updating the Form of the Average Rating.
 
-router.put("/UpdateTrainList/:id", async (req, res) => {
+router.patch("/:id", async (req, res) => {
   try {
-    const id = req.params.id
-    const newData = req.body
-    const updatedCollage = await dataModel.findByIdAndUpdate(id, newData, { new: true })
-    res.send({ message: true, data: "data Updated succesfully.", updatedCollage: updatedCollage })
+    const id = req.params.id;
+    const newData = req.body;
+    const updatedCollage = await dataModel.findByIdAndUpdate(id, newData, { new: true });
+    if (!updatedCollage) {
+      return res.status(404).send({ message: false, response: "Document not found." });
+    }
+    res.send({ message: true, data: "Data updated successfully.", updatedCollage: updatedCollage });
   } catch (err) {
-    console.log("error");
-    res.send({ message: false, response: "please check the code here is the error.", error: err })
+    console.error("Error:", err);
+    res.status(500).send({ message: false, response: "Internal server error.", error: err });
   }
 });
+
 
 
 

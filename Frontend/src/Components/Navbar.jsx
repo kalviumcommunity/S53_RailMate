@@ -17,6 +17,7 @@ const Navbar = () => {
       setlogin(false);
       navigate("/login");
       alert("Your Logging Out")
+      document.cookie = 'User=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
     } 
   };
 
@@ -44,12 +45,17 @@ const Navbar = () => {
         <Link style={{ textDecoration: "none", color: "black" }} to={"Contact"}>
           <h3>Contact</h3>
         </Link>
-        <Link style={{ textDecoration: "none", color: "black" }} to={"Signup"}>
-          <h3>Signup</h3>
-        </Link>
+        <div
+        style={{
+          display : login ? "none" : "block",
+        }}>  <Link style={{ textDecoration: "none", color: "black" }} to={"Signup"}>
+        <h3>Signup</h3>
+      </Link>          </div>
+        
         <button style={{ border: "none", color: "black" , backgroundColor:"#F0FFFF", cursor:"pointer" }} onClick={()=>{
           handleLogin();if(!login){
             navigate("Login")
+            
           }
         }}>
           <h3>{login ? "Log Out" : "Log In"}</h3>

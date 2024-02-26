@@ -19,7 +19,7 @@ const Home = () => {
   const [filterTrainNumber, setFilterTrainNumber] = useState('');
   const [selectedRegion, setSelectedRegion] = useState('');
   const { login } = useContext(AppContext);
-  const {update,setUpdate}=useContext(AppContext)
+  const {update,setUpdate,setId}=useContext(AppContext)
 
   const fetchData = () => {
     axios.get('https://railmate.onrender.com/Train')
@@ -97,7 +97,7 @@ const Home = () => {
     <div className={`container ${blurBackground ? 'blur(8px)' : ''}`}>
      <div style={{
       display:update ? "block" : "none"
-     }}><TrainDataChange/></div> 
+     }}><TrainDataChange FetchData={fetchData}/></div> 
       <div className="filter-container" style={{
         display: 'flex',
         justifyContent: 'space-around',
@@ -207,7 +207,8 @@ const Home = () => {
               </div>
               <div className='putreq'>
                 <button className="update" onClick={()=>{
-                  setUpdate(true)
+                  setUpdate(true);
+                  setId(e._id)
                 }} UpdateFunction={{setUpdate,update}}>Update</button>
                 <button className="Delete" onClick={() => { delete_train(e._id); }}>Delete</button></div>
             </div >
