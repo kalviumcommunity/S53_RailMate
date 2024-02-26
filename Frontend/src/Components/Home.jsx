@@ -46,7 +46,11 @@ const Home = () => {
   }, []);
 
   function FilteredData(filteredValue) {
-    return data.filter((train) => train.region.includes(filteredValue));
+    const Data=originalData;
+    if(filteredValue=="All"){
+      return Data
+    }
+    return Data.filter((train) => train.region.includes(filteredValue));
   }
 
   const filteredData = FilteredData(selectedRegion).filter((train) => train.train_number.includes(filterTrainNumber));
