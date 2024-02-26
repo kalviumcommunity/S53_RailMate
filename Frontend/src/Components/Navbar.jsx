@@ -17,7 +17,7 @@ const Navbar = () => {
       setlogin(false);
       navigate("/login");
       alert("Your Logging Out")
-      document.cookie = 'User=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+      document.cookie = 'User=; expires=Thu, 01 Jan 1978 00:00:00 UTC; path=/;';
     } 
   };
 

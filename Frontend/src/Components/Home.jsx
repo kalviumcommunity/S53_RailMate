@@ -94,7 +94,8 @@ const Home = () => {
   };
 
   return (
-    <div className={`container ${blurBackground ? 'blur(8px)' : ''}`}>
+    <div className={`container ${blurBackground ? 'blur(8px)' : ''}` } style={{
+    }}>
      <div style={{
       display:update ? "block" : "none"
      }}><TrainDataChange FetchData={fetchData}/></div> 
@@ -175,6 +176,7 @@ const Home = () => {
         filteredData.map((e) => (
           <div key={e._id} className="train-info" style={{
             filter: login ? 'blur(0px)' : 'blur(8px)',
+      overflowY : update ? "hidden" : "auto"          
           }}>
             <div className="TrainImg">
               <h1 className='Railmitra'>
