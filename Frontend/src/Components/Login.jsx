@@ -14,6 +14,7 @@ const Login = () => {
   } = useForm();
   const [formdata, setFormdata] = useState([]);
   const { login, setlogin } = useContext(AppContext);
+  const [User,setUser]=useState("")
   const navigate = useNavigate();
   const showToastMessage = () => {
     toast.error("Please Login with correct account");
@@ -27,13 +28,17 @@ const Login = () => {
   }, []);
 
   const formSubmitHandler = async (data) => {
+    
     try {
       const response = await axios.post('https://railmate.onrender.com/login', data);
+      // setUser(data.Email)
+      // setUser(data.Email)
+      // console.log()
 console.log(response)
       if (response.data.Message === 'Login Success') {
         setlogin(true);
         const newData = [...formdata, data.Email];
-
+        document.cookie=`User=${data.Email}`
         localStorage.setItem('LoginData', JSON.stringify(newData));
         localStorage.setItem('isLoggedIn', true);
         setFormdata(newData);
@@ -45,7 +50,7 @@ console.log(response)
       console.error('Error:', error);
     }
   };
-
+// console.log(user)
 
 
   return (
