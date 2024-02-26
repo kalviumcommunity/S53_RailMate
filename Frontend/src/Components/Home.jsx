@@ -9,6 +9,7 @@ import CorrectAni from './Correct Ani.json';
 import { AppContext } from './ParentContext';
 import '../App.css';
 import FilterByRegion from './FilterByRegion';
+import TrainDataChange from './TrainDataChange';
 
 const Home = () => {
   const [originalData, setOriginalData] = useState([]);
@@ -18,6 +19,7 @@ const Home = () => {
   const [filterTrainNumber, setFilterTrainNumber] = useState('');
   const [selectedRegion, setSelectedRegion] = useState('');
   const { login } = useContext(AppContext);
+  const {update,setUpdate}=useContext(AppContext)
 
   const fetchData = () => {
     axios.get('https://railmate.onrender.com/Train')
@@ -93,6 +95,9 @@ const Home = () => {
 
   return (
     <div className={`container ${blurBackground ? 'blur(8px)' : ''}`}>
+     <div style={{
+      display:update ? "block" : "none"
+     }}><TrainDataChange/></div> 
       <div className="filter-container" style={{
         display: 'flex',
         justifyContent: 'space-around',
@@ -201,7 +206,9 @@ const Home = () => {
                 }}> <strong>{e.region}</strong></p>
               </div>
               <div className='putreq'>
-                <button className="update">Update</button>
+                <button className="update" onClick={()=>{
+                  setUpdate(true)
+                }} UpdateFunction={{setUpdate,update}}>Update</button>
                 <button className="Delete" onClick={() => { delete_train(e._id); }}>Delete</button></div>
             </div >
 
