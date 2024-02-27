@@ -31,9 +31,6 @@ const Login = () => {
     
     try {
       const response = await axios.post('https://railmate.onrender.com/login', data);
-      // setUser(data.Email)
-      // setUser(data.Email)
-      // console.log()
 console.log(response)
       if (response.data.Message === 'Login Success') {
         setlogin(true);
