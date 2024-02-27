@@ -1,9 +1,9 @@
+const jwt = require('jsonwebtoken');
 const express = require("express");
-
 const router = express.Router();
 const { dataModel, FormdataModel } = require("./scheema");
 const Joi = require("joi");
-
+require("dotenv").config()
 
 router.get("/Train", async (req, res) => {
   try {
@@ -94,17 +94,22 @@ router.post('/login', async (req, res) => {
     if (error) {
       return res.json({ error: error.details[0].message });
     }
-    const{Password,Email}=req.body;
-    const user = await FormdataModel.findOne({ Email: Email,Password:Password });
-    if (user && user.Password === Password && user.Email===Email) {
-      res.json({ success: true, Message: "Login Success" });
+
+    const { Password, Email } = req.body;
+    const user = await FormdataModel.findOne({ Email: Email, Password: Password });
+
+    if (user && user.Password === Password && user.Email === Email) {
+
+      const token = jwt.sign({ userId: user._id, email: user.Email },process.env.secret, { expiresIn: '7d' });
+
+      res.json({ success: true, Message: "Login Success", token });
     } else {
-      res.json({ Message:"Login Failed"});
+      res.json({ Message: "Login Failed" });
     }
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
-})
+});
 
 /////////////////////////Joi Making Validation////////////////////////
 

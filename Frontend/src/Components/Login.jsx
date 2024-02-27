@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AppContext } from './ParentContext';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { getCookie,deleteCookie } from './Cookie';
 const Login = () => {
   const {
     register,
@@ -36,6 +36,7 @@ console.log(response)
         setlogin(true);
         const newData = [...formdata, data.Email];
         document.cookie=`User=${data.Email}`
+        document.cookie=`JWT=${response.data.token}`
         localStorage.setItem('LoginData', JSON.stringify(newData));
         localStorage.setItem('isLoggedIn', true);
         setFormdata(newData);

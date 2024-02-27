@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Login from './Login';
 import logo from "./trainlogo.png"
 import { AppContext } from './ParentContext';
-
+import { deleteCookie } from './Cookie';
 const Navbar = () => {
   // const [login, setlogin] = useState(false);
   const {login, setlogin} = useContext(AppContext)
@@ -17,7 +17,8 @@ const Navbar = () => {
       setlogin(false);
       navigate("/login");
       alert("Your Logging Out")
-      document.cookie = 'User=; expires=Thu, 01 Jan 1978 00:00:00 UTC; path=/;';
+      deleteCookie("JWT")
+      deleteCookie("User")
     } 
   };
 
