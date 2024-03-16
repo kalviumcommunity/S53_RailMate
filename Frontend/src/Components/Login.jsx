@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AppContext } from './ParentContext';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { getCookie,deleteCookie } from './Cookie';
+
 const Login = () => {
   const {
     register,
