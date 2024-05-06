@@ -10,7 +10,7 @@ import { AppContext } from './ParentContext';
 import '../App.css';
 import FilterByRegion from './FilterByRegion';
 import TrainDataChange from './TrainDataChange';
-import { getCookie } from './Cookie';
+// import { getCookie } from './Cookie';
 
 const Home = () => {
   const [originalData, setOriginalData] = useState([]);
@@ -21,8 +21,7 @@ const Home = () => {
   const [selectedRegion, setSelectedRegion] = useState('');
   const { login } = useContext(AppContext);
   const {update,setUpdate,setId}=useContext(AppContext)
-
-  const fetchData = () => {
+  function getData(){      
     axios.get('https://railmate.onrender.com/Train')
       .then((res) => {
         setOriginalData(res.data);
@@ -33,32 +32,22 @@ const Home = () => {
         console.log('err', err);
         setLoading(false);
       });
-  };
+  }
+
 
   const delete_train = async (id) => {
     try {
       await axios.delete(`https://railmate.onrender.com/DeleteTrain/${id}`);
-      fetchData();
+      getData();
     } catch (error) {
       console.log(error);
     }
   };
 
-  const saveTrain= async (trainDetails)=>{
-    try {
-      const userEmail = getCookie('User')
-      console.log(userEmail)
-      const response = await axios.patch(`http://localhost:5000/users/${userEmail}`, { trainDetails });
-      console.log(response.data)
-      return
-    } catch (error) {
-      console.error('Error updating Saved array with train details:', error);
-      throw error;
-    }
-  }
+  
 
   useEffect(() => {
-    fetchData();
+    getData();
   }, []);
 
   function FilteredData(filteredValue) {
@@ -112,7 +101,7 @@ const Home = () => {
     }}>
      <div style={{
       display:update ? "block" : "none"
-     }}><TrainDataChange FetchData={fetchData}/></div> 
+     }}><TrainDataChange getData={getData}/></div> 
       <div className="filter-container" style={{
         display: 'flex',
         justifyContent: 'space-around',
@@ -193,42 +182,47 @@ const Home = () => {
       overflowY : update ? "hidden" : "auto"          
           }}>
             <div className="TrainImg">
-              <h1 className='Railmitra'>
-                <span style={{ color: 'orange' }}>Rail</span>
-                <span style={{ color: 'green' }}>Mitra</span>
-              </h1>
-              <img src={img} alt="" />
-            </div>
-            <div>
-              <div className="dataContainer">
-                <p className='TrainNo'><h2>Train No:</h2>{e.train_number}</p>
-                <p className='TrainName'><h2>Train Name:</h2> {e.train_name}</p>
-              </div>
-              <div className="RouteContainer">
-                <p className='TrainNo'><h2>From:</h2> {e.departure_station}</p>
-                <Lottie options={animationOptions2} height={200} width={200} />
-                <p className='TrainNo'><h2>To:</h2> {e.destination_station}</p>
-              </div>
-              <div className="data2">
-                <p className='TrainRating'><h2>Rating:</h2> {e.average_rating}</p>
-                <p className='TrainTimmings'><h2>Timings:</h2>{e.timings}</p>
-              </div>
-              <div className="reviews" >
-                <p><strong>{e.reviews}</strong></p>
-                <p><strong>{e.description}</strong></p>
-                <p style={{
-                  fontSize: '20px',
-                  textAlign: 'center',
-                }}> <strong>{e.region}</strong></p>
-              </div>
-              <div className='putreq'>
-                <button className="update" onClick={()=>{
-                  setUpdate(true);
-                  setId(e._id)
-                }} UpdateFunction={{setUpdate,update}}>Update</button>
-                <button onClick={()=>{saveTrain(e)}}>Save</button>
-                <button className="Delete" onClick={() => { delete_train(e._id); }}>Delete</button></div>
-            </div >
+  <h1 className='Railmitra'>
+    <span style={{ color: 'orange' }}>Rail</span>
+    <span style={{ color: 'green' }}>Mitra</span>
+  </h1>
+  <img src={img} alt="" />
+</div>
+<div>
+  <div className="dataContainer">
+    <h2>Train No:</h2>
+    <p className='TrainNo'>{e.train_number}</p>
+    <h2>Train Name:</h2>
+    <p className='TrainName'>{e.train_name}</p>
+  </div>
+  <div className="RouteContainer">
+    <h2>From:</h2>
+    <p className='TrainNo'>{e.departure_station}</p>
+    <Lottie options={animationOptions2} height={200} width={200} />
+    <h2>To:</h2>
+    <p className='TrainNo'>{e.destination_station}</p>
+  </div>
+  <div className="data2">
+    <h2>Rating:</h2>
+    <p className='TrainRating'>{e.average_rating}</p>
+    <h2>Timings:</h2>
+    <p className='TrainTimmings'>{e.timings}</p>
+  </div>
+  <div className="reviews">
+    <p><strong>{e.reviews}</strong></p>
+    <p><strong>{e.description}</strong></p>
+    <p style={{ fontSize: '20px', textAlign: 'center' }}><strong>{e.region}</strong></p>
+  </div>
+  <div className='putreq'>
+    <button className="update" onClick={()=>{
+      setUpdate(true);
+      setId(e._id);
+    }}>Update</button>
+    {/* <button onClick={()=>{saveTrain(e)}}>Save</button> */}
+    <button className="Delete" onClick={() => { delete_train(e._id); }}>Delete</button>
+  </div>
+</div>
+
 
           </div>
         ))
