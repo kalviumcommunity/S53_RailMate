@@ -42,8 +42,13 @@ const Datatype=mongoose.Schema({
   Email:String,
   Password:String,
   ConfirmPassword:String,
-  DOB:String
+  DOB:String,
+  Saved:{
+    type:Array,
+    default:[]
+  }
 })
+
 
 
 const dataModel = mongoose.model("TrainsList", schema);

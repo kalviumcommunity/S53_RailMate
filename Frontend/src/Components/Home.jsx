@@ -10,6 +10,7 @@ import { AppContext } from './ParentContext';
 import '../App.css';
 import FilterByRegion from './FilterByRegion';
 import TrainDataChange from './TrainDataChange';
+import { getCookie } from './Cookie';
 
 const Home = () => {
   const [originalData, setOriginalData] = useState([]);
@@ -42,6 +43,19 @@ const Home = () => {
       console.log(error);
     }
   };
+
+  const saveTrain= async (trainDetails)=>{
+    try {
+      const userEmail = getCookie('User')
+      console.log(userEmail)
+      const response = await axios.patch(`http://localhost:5000/users/${userEmail}`, { trainDetails });
+      console.log(response.data)
+      return
+    } catch (error) {
+      console.error('Error updating Saved array with train details:', error);
+      throw error;
+    }
+  }
 
   useEffect(() => {
     fetchData();
@@ -212,6 +226,7 @@ const Home = () => {
                   setUpdate(true);
                   setId(e._id)
                 }} UpdateFunction={{setUpdate,update}}>Update</button>
+                <button onClick={()=>{saveTrain(e)}}>Save</button>
                 <button className="Delete" onClick={() => { delete_train(e._id); }}>Delete</button></div>
             </div >
 

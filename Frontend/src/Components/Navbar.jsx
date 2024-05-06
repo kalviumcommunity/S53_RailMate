@@ -17,7 +17,8 @@ const Navbar = () => {
       setlogin(false);
       navigate("/login");
       alert("Your Logging Out")
-      document.cookie = 'User=; expires=Thu, 01 Jan 1978 00:00:00 UTC; path=/;';
+      deleteCookie("JWT")
+      deleteCookie("User")
     } 
   };
 
@@ -62,6 +63,9 @@ const Navbar = () => {
         </button>
         <Link style={{ textDecoration: "none", color: "black" }} to={"TrainForm"}>
           <h3>TrainForm</h3>
+        </Link>
+        <Link style={{ textDecoration: "none", color: "black" }} to={"Saved"}>
+          <h3>Saved</h3>
         </Link>
       </div>
     </div>
