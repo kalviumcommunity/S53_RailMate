@@ -86,7 +86,6 @@ router.post('/formcreation', async (req, res) => {
     res.json({ error: error.message });
   }
 });
-
 // Login route
 router.post('/login', async (req, res) => {
   try {
@@ -97,7 +96,7 @@ router.post('/login', async (req, res) => {
     const{Password,Email}=req.body;
     const user = await FormdataModel.findOne({ Email: Email,Password:Password });
     if (user && user.Password === Password && user.Email===Email) {
-      res.json({ success: true, Message: "Login Success" });
+      res.json({ success: true, Message: "Login Success",userId:user._id });
     } else {
       res.json({ Message:"Login Failed"});
     }

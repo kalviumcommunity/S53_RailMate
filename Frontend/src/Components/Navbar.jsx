@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Login from './Login';
 import logo from "./trainlogo.png"
 import { AppContext } from './ParentContext';
-
+import { deleteCookie } from './Cookie';
 const Navbar = () => {
   // const [login, setlogin] = useState(false);
   const {login, setlogin} = useContext(AppContext)
@@ -53,9 +53,9 @@ const Navbar = () => {
       </Link>          </div>
         
         <button style={{ border: "none", color: "black" , backgroundColor:"#F0FFFF", cursor:"pointer" }} onClick={()=>{
+          deleteCookie();
           handleLogin();if(!login){
             navigate("Login")
-            
           }
         }}>
           <h3>{login ? "Log Out" : "Log In"}</h3>
