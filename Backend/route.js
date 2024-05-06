@@ -87,10 +87,30 @@ router.post('/formcreation', async (req, res) => {
   }
 });
 
+// get user data
+
+router.get('/users/:email', async (req, res) => {
+  const email = req.params.email;
+
+  try {
+    // Find the user by email
+    const user = await FormdataModel.findOne({ Email: email });
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.status(200).json({ user });
+  } catch (error) {
+    console.error('Error retrieving user data:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
 // Login route
 router.post('/login', async (req, res) => {
   try {
     const { error } = FormValidation.validate(req.body);
+    
     if (error) {
       return res.json({ error: error.details[0].message });
     }
@@ -110,6 +130,37 @@ router.post('/login', async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
+// Adding train
+
+router.patch('/users/:userEmail', async (req, res) => {
+  const Email = req.params.userEmail;
+  const trainDetails = req.body.trainDetails;
+
+  try {
+    const user = await FormdataModel.findOne({Email});
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    user.Saved.push(trainDetails);
+
+    const updatedUser = await user.save();
+
+    res.status(200).json({ message: 'Saved array updated successfully', user: updatedUser });
+  } catch (error) {
+    console.error('Error updating user document:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+})
+////Deleting the Added train;
+router.delete("/Deletecarttrain/:userEmail",async(req,res)=>{
+  try {
+    
+  } catch (error) {
+    
+  }
+})
 
 /////////////////////////Joi Making Validation////////////////////////
 

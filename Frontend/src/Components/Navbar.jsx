@@ -64,6 +64,9 @@ const Navbar = () => {
         <Link style={{ textDecoration: "none", color: "black" }} to={"TrainForm"}>
           <h3>TrainForm</h3>
         </Link>
+        <Link style={{ textDecoration: "none", color: "black" }} to={"Saved"}>
+          <h3>Saved</h3>
+        </Link>
       </div>
     </div>
   );
