@@ -1,9 +1,9 @@
-const jwt = require('jsonwebtoken');
 const express = require("express");
+
 const router = express.Router();
 const { dataModel, FormdataModel } = require("./scheema");
 const Joi = require("joi");
-require("dotenv").config()
+
 
 router.get("/Train", async (req, res) => {
   try {
@@ -86,79 +86,22 @@ router.post('/formcreation', async (req, res) => {
     res.json({ error: error.message });
   }
 });
-
-// get user data
-
-router.get('/users/:email', async (req, res) => {
-  const email = req.params.email;
-
-  try {
-    // Find the user by email
-    const user = await FormdataModel.findOne({ Email: email });
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
-    }
-
-    res.status(200).json({ user });
-  } catch (error) {
-    console.error('Error retrieving user data:', error);
-    res.status(500).json({ message: 'Internal server error' });
-  }
-});
-
 // Login route
 router.post('/login', async (req, res) => {
   try {
     const { error } = FormValidation.validate(req.body);
-    
     if (error) {
       return res.json({ error: error.details[0].message });
     }
-
-    const { Password, Email } = req.body;
-    const user = await FormdataModel.findOne({ Email: Email, Password: Password });
-
-    if (user && user.Password === Password && user.Email === Email) {
-
-      const token = jwt.sign({ userId: user._id, email: user.Email },process.env.secret, { expiresIn: '7d' });
-      
-      res.json({ success: true, Message: "Login Success", token });
+    const{Password,Email}=req.body;
+    const user = await FormdataModel.findOne({ Email: Email,Password:Password });
+    if (user && user.Password === Password && user.Email===Email) {
+      res.json({ success: true, Message: "Login Success",userId:user._id });
     } else {
-      res.json({ Message: "Login Failed" });
+      res.json({ Message:"Login Failed"});
     }
   } catch (error) {
     res.status(500).json({ error: error.message });
-  }
-});
-
-// Adding train
-
-router.patch('/users/:userEmail', async (req, res) => {
-  const Email = req.params.userEmail;
-  const trainDetails = req.body.trainDetails;
-
-  try {
-    const user = await FormdataModel.findOne({Email});
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
-    }
-
-    user.Saved.push(trainDetails);
-
-    const updatedUser = await user.save();
-
-    res.status(200).json({ message: 'Saved array updated successfully', user: updatedUser });
-  } catch (error) {
-    console.error('Error updating user document:', error);
-    res.status(500).json({ message: 'Internal server error' });
-  }
-})
-////Deleting the Added train;
-router.delete("/Deletecarttrain/:userEmail",async(req,res)=>{
-  try {
-    
-  } catch (error) {
-    
   }
 })
 

@@ -54,9 +54,9 @@ const Navbar = () => {
       </Link>          </div>
         
         <button style={{ border: "none", color: "black" , backgroundColor:"#F0FFFF", cursor:"pointer" }} onClick={()=>{
+          deleteCookie();
           handleLogin();if(!login){
             navigate("Login")
-            
           }
         }}>
           <h3>{login ? "Log Out" : "Log In"}</h3>
