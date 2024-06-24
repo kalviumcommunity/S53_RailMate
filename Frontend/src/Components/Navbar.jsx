@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import Login from './Login';
 import logo from "./trainlogo.png"
 import { AppContext } from './ParentContext';
-import { deleteCookie } from './Cookie';
+import { setUserCookies, deleteUserCookies } from './HandleCookie.js';
+
 const Navbar = () => {
   // const [login, setlogin] = useState(false);
   const {login, setlogin} = useContext(AppContext)
@@ -13,12 +13,12 @@ const Navbar = () => {
   const handleLogin = () => {
     if (login) {
       // Log out
+      deleteUserCookies()
       localStorage.setItem("isLoggedIn", "false");
       setlogin(false);
       navigate("/login");
       alert("Your Logging Out")
-      deleteCookie("JWT")
-      deleteCookie("User")
+
     } 
   };
 
@@ -54,7 +54,6 @@ const Navbar = () => {
       </Link>          </div>
         
         <button style={{ border: "none", color: "black" , backgroundColor:"#F0FFFF", cursor:"pointer" }} onClick={()=>{
-          deleteCookie();
           handleLogin();if(!login){
             navigate("Login")
           }
