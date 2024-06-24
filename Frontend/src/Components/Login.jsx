@@ -4,8 +4,8 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { AppContext } from './ParentContext';
 import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import {createCookie} from './Cookie.js';
+import 'react-toastify/dist/ReactToastify.css';   
+import { setUserCookies, deleteUserCookies } from './HandleCookie.js';
 const Login = () => {
   const {
     register,
@@ -39,7 +39,7 @@ console.log(response)
       if (response.data.Message === 'Login Success') {
         setlogin(true);
         const newData = [...formdata, data.Email];
-        createCookie(data.Email,response.data.userId)
+        setUserCookies(response.data.UserEmail,response.data.userId)
         localStorage.setItem('LoginData', JSON.stringify(newData));
         localStorage.setItem('isLoggedIn', true);
         setFormdata(newData);

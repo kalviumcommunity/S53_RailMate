@@ -96,7 +96,7 @@ router.post('/login', async (req, res) => {
     const{Password,Email}=req.body;
     const user = await FormdataModel.findOne({ Email: Email,Password:Password });
     if (user && user.Password === Password && user.Email===Email) {
-      res.json({ success: true, Message: "Login Success",userId:user._id });
+      res.json({ success: true, Message: "Login Success",userId:user._id,UserEmail:Email });
     } else {
       res.json({ Message:"Login Failed"});
     }
